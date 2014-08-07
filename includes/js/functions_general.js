@@ -10,6 +10,7 @@ function aleatorio(nMax,nMin){
 
 // COPIAR
 function copiar(valor){
-	var text = document.getElementById(valor).value;
+	//var text = document.getElementById(valor).value;
+	var text = "Hola";
 	window.plugins.copy(text);
 }
