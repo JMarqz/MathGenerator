@@ -12,5 +12,7 @@ function aleatorio(nMax,nMin){
 function copiar(valor){
 	//var text = document.getElementById(valor).value;
 	var text = "Hola";
-	window.plugins.copy(text);
+	window.plugins.clipboard.copy(text);
+
+	alert("Copiado con éxito: " + text);
 }
