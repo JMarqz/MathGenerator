@@ -13,7 +13,7 @@ function copiar(){
 	var text = document.getElementById("resultado").value;
 	var text2 = "Hola";
 	//window.plugins.clipboard.copy(text);
-	//cordova.plugins.clipboard.copy(text);
+	cordova.plugins.clipboard.copy(text);
 
 	alert("Problemas: " + text);
 	alert("Texto: " + text2);
