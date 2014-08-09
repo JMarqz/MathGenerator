@@ -12,8 +12,8 @@ function aleatorio(nMax,nMin){
 function copiar(){
 	//var text = document.getElementById("resultado").value;
 	var text = "Hola";
-	//window.plugins.clipboard.copy(text);
-	cordova.plugins.clipboard.copy(text);
+	window.plugins.clipboard.copy(text);
+	//cordova.plugins.clipboard.copy(text);
 
 	alert("Text: \n" + text);
 }
