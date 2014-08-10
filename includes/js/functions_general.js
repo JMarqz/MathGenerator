@@ -18,7 +18,7 @@ function copiar(){
 
 function imprimir(){
 	var contenido = document.getElementById("resultado").value;
-	var imprimir = contenido.replace("\n", "<br>");
+	var imprimir = contenido.replace(/\n/g, "<br>");
 
 	window.plugin.printer.isServiceAvailable(
 	    function (isAvailable) {
