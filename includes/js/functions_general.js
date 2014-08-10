@@ -13,7 +13,7 @@ function copiar(){
 	var texto = document.getElementById("resultado").value;
 	window.plugins.clipboard.copy(texto);
 
-	alert("¡Copiado con éxito!");
+	alert("¡Problemas copiados exitosamente!");
 }
 
 function imprimir(){

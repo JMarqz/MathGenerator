@@ -40,12 +40,8 @@ function suma(){
 				}
 			}
 		}
+		resultado = 0;
 	};
-
-	/*
-	var convertidoHTML = encodeURIComponent(arraySuma);
-	var desplegarHTML = decodeURIComponent(convertirHTML);
-	$('#resultado').html(arraySuma);	
-	*/
+	
 	document.getElementById("resultado").value = arraySuma;
 }
