@@ -18,11 +18,12 @@ function copiar(){
 
 function imprimir(){
 	var contenido = document.getElementById("resultado").value;
+	var imprimir = contenido.replace("\n", "<br>");
 
 	window.plugin.printer.isServiceAvailable(
 	    function (isAvailable) {
 	        if (isAvailable) {
-	        	window.plugin.printer.print(contenido);
+	        	window.plugin.printer.print(imprimir);
 	        } else{
 	        	alert("¡Lo sentimos, pero este servicio no está disponible en tu dispositivo!");
 	        }

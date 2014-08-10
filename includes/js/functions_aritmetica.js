@@ -34,18 +34,18 @@ function suma(){
 			} else{
 				if (respuestas) {
 					// Con respuestas
-					arraySuma += tmp + " (R: " + resultado + ")" + "<br>";
+					arraySuma += tmp + " (R: " + resultado + ")" + "\n";
 				} else{
-					arraySuma += tmp + "<br>";
+					arraySuma += tmp + "\n";
 				}
 			}
 		}
 	};
 
-	/*var convertidoHTML = encodeURIComponent(arraySuma);
+	/*
+	var convertidoHTML = encodeURIComponent(arraySuma);
 	var desplegarHTML = decodeURIComponent(convertirHTML);
-
-	document.getElementById("resultado").value = desplegarHTML;
+	$('#resultado').html(arraySuma);	
 	*/
-	$('#resultado').html(arraySuma);
+	document.getElementById("resultado").value = arraySuma;
 }
