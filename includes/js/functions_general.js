@@ -17,3 +17,15 @@ function copiar(){
 
 	alert("Text: \n" + text);
 }
+
+function imprimir(){
+	var contenido = document.getElementById("resultado").value;
+
+	window.plugin.printer.isServiceAvailable(
+	    function (isAvailable) {
+	        alert(isAvailable ? 'Service is available' : 'Service NOT available');
+
+	        window.plugin.printer.print(contenido);
+	    }
+	);
+}
