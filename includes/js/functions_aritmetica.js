@@ -34,13 +34,16 @@ function suma(){
 			} else{
 				if (respuestas) {
 					// Con respuestas
-					arraySuma += tmp + " (R: " + resultado + ")" + "\n";
+					arraySuma += tmp + " (R: " + resultado + ")" + "<br>";
 				} else{
-					arraySuma += tmp + "\n";
+					arraySuma += tmp + "<br>";
 				}
 			}
 		}
 	};
 
-	document.getElementById("resultado").value = arraySuma;
+	var convertidoHTML = encodeURIComponent(arraySuma);
+	var desplegarHTML = decodeURIComponent(convertirHTML);
+
+	document.getElementById("resultado").value = desplegarHTML;
 }

@@ -10,12 +10,10 @@ function aleatorio(nMax,nMin){
 
 // COPIAR
 function copiar(){
-	var text = document.getElementById("resultado").value;
-	//var text = "Hola";
-	window.plugins.clipboard.copy(text);
-	//cordova.plugins.clipboard.copy(text);
+	var texto = document.getElementById("resultado").value;
+	window.plugins.clipboard.copy(texto);
 
-	alert("Text: \n" + text);
+	alert("¡Copiado con éxito!");
 }
 
 function imprimir(){
@@ -23,9 +21,11 @@ function imprimir(){
 
 	window.plugin.printer.isServiceAvailable(
 	    function (isAvailable) {
-	        alert(isAvailable ? 'Service is available' : 'Service NOT available');
-
-	        window.plugin.printer.print(contenido);
+	        if (isAvailable) {
+	        	window.plugin.printer.print(contenido);
+	        } else{
+	        	alert("¡Lo sentimos, pero este servicio no está disponible en tu dispositivo!");
+	        }
 	    }
 	);
 }
