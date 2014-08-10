@@ -42,8 +42,10 @@ function suma(){
 		}
 	};
 
-	var convertidoHTML = encodeURIComponent(arraySuma);
+	/*var convertidoHTML = encodeURIComponent(arraySuma);
 	var desplegarHTML = decodeURIComponent(convertirHTML);
 
 	document.getElementById("resultado").value = desplegarHTML;
+	*/
+	$('#resultado').html(arraySuma);
 }
