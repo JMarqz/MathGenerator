@@ -1,3 +1,13 @@
+// DEVICEREADY
+document.addEventListener("deviceready", onDeviceReady, false);
+
+function onDeviceReady() {
+    setTimeout(function() {
+        navigator.splashscreen.hide();
+    }, 2000);
+}
+
+
 // GENERAR NÚMEROS ALEATORIOS
 function aleatorio(nMax,nMin){ 
    	numPosibilidades = nMax - nMin; 
@@ -13,9 +23,12 @@ function copiar(){
 	var texto = document.getElementById("resultado").value;
 	window.plugins.clipboard.copy(texto);
 
-	alert("¡Problemas copiados exitosamente!");
+	//alert("¡Problemas copiados exitosamente!");
+	navigator.notification.alert("Problemas copiados al portapapeles", nothing, 'MathGenerator', 'Ok');
 }
 
+
+// IMPRIMIR
 function imprimir(){
 	var contenido = document.getElementById("resultado").value;
 	var imprimir = contenido.replace(/\n/g, "<br>");
@@ -25,8 +38,13 @@ function imprimir(){
 	        if (isAvailable) {
 	        	window.plugin.printer.print(imprimir);
 	        } else{
-	        	alert("¡Lo sentimos, pero este servicio no está disponible en tu dispositivo!");
+	        	navigator.notification.alert("¡El servicio no está disponible en tu dispositivo!", nothing, 'MathGenerator', 'Ok');
 	        }
 	    }
 	);
+}
+
+
+function nothing(){
+	// do nothing
 }
