@@ -10,8 +10,8 @@ function aleatorio(nMax,nMin){
 
 // COPIAR
 function copiar(){
-	//var text = document.getElementById("resultado").value;
-	var text = "Hola";
+	var text = document.getElementById("resultado").value;
+	//var text = "Hola";
 	window.plugins.clipboard.copy(text);
 	//cordova.plugins.clipboard.copy(text);
 
