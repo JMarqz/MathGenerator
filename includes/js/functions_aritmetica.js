@@ -8,19 +8,6 @@ function sumas(){
 
 	// Crear Array con números aleatorios
 	var sumas = crearArray(nEjercicios, nTerm, nMax, nMin);
-	/*
-	var sumas = new Array();
-
-	for(var i=0; i<nEjercicios; i++){
-		sumas.push(new Array());
-
-		for(var j=0; j<nTerm; j++){
-			var randomNum1 = aleatorio(nMax,nMin);
-
-			sumas[i].push(randomNum1);
-		}
-	}
-	*/
 
 	// Generar Sumas
 	var problemasSumas = "";
