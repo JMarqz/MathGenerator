@@ -7,7 +7,7 @@ function sumas(){
 	var respuestas = $("#respuestas").is(":checked");
 
 	// Crear Array con números aleatorios
-	var sumas = crearArray(nEjercicios, nTerm);
+	var sumas = crearArray(nEjercicios, nTerm, nMax, nMin);
 	/*
 	var sumas = new Array();
 

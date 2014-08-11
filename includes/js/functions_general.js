@@ -19,7 +19,7 @@ function aleatorio(nMax,nMin){
 
 
 // CREAR ARREGLO CON NÚMEROS ALEATORIO
-function crearArray(f, c){
+function crearArray(filas, columnas, nMax, nMin){
 	var array = new Array();
 
 	for(var i=0; i<f; i++){
