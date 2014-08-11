@@ -4,7 +4,7 @@ document.addEventListener("deviceready", onDeviceReady, false);
 function onDeviceReady() {
     setTimeout(function() {
         navigator.splashscreen.hide();
-    }, 10000);
+    }, 5000);
 }
 
 
@@ -18,13 +18,33 @@ function aleatorio(nMax,nMin){
 }
 
 
+// CREAR ARREGLO CON NÚMEROS ALEATORIO
+function crearArray(f, c){
+	var array = new Array();
+
+	for(var i=0; i<f; i++){
+		array.push(new Array());
+
+		for(var j=0; j<c; j++){
+			var randomNum1 = aleatorio(nMax,nMin);
+			array[i].push(randomNum1);
+		}
+	}
+	return array;
+}
+
+
 // COPIAR
 function copiar(){
 	var texto = document.getElementById("resultado").value;
-	window.plugins.clipboard.copy(texto);
-
-	//alert("¡Problemas copiados exitosamente!");
-	navigator.notification.alert("Problemas copiados al portapapeles", nothing, 'MathGenerator', 'Ok');
+	window.plugins.clipboard.copy(
+		texto,
+		function(){ // Success
+			navigator.notification.alert("Se ha copiado al portapapeles exitosamente", null, "Mensaje", "Ok");
+		},
+		function(){ // Error
+			navigator.notification.alert("Ocurrió un error al copiar en el portapapeles", null, "Error", "Ok");
+		});
 }
 
 
@@ -38,13 +58,8 @@ function imprimir(){
 	        if (isAvailable) {
 	        	window.plugin.printer.print(imprimir);
 	        } else{
-	        	navigator.notification.alert("¡El servicio no está disponible en tu dispositivo!", nothing, 'MathGenerator', 'Ok');
+	        	navigator.notification.alert("¡Este servicio no está disponible en tu dispositivo!", null, 'Error', 'Ok');
 	        }
 	    }
 	);
-}
-
-
-function nothing(){
-	// do nothing
 }
