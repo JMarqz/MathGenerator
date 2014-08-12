@@ -39,11 +39,13 @@
 				<label for="number">Número de ejercicios a generar (1-100)</label>
 			    <input type="range" name="number" id="number" data-mini="true" data-track-theme="b" data-highlight="true" min="1" max="100" value="10">
 
-			    <label for="resultados_enteros">Solo resultados enteros</label>
-			    <input type="checkbox" name="resultados_enteros" id="resultados_enteros">
-			    
-			    <label for="respuestas">Incluir respuestas</label>
-			    <input type="checkbox" name="respuestas" id="respuestas">			    
+			    <fieldset data-role="controlgroup" data-mini="true">
+				    <label for="resultados_enteros">Solo resultados enteros</label>
+				    <input type="checkbox" name="resultados_enteros" id="resultados_enteros">
+				    
+				    <label for="respuestas">Incluir respuestas</label>
+				    <input type="checkbox" name="respuestas" id="respuestas">
+			    </fieldset>
 			</form>
 
 			<!-- BTN GENERAR -->
