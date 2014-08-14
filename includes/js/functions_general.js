@@ -9,8 +9,8 @@ function onDeviceReady() {
 
 
 // GENERAR NÚMEROS ALEATORIOS
-function aleatorio(nMax,nMin){ 
-   	numPosibilidades = nMax - nMin; 
+function aleatorio(nMax,nMin){
+   	numPosibilidades = nMax - nMin;
    	aleat = Math.random() * numPosibilidades;
    	aleat = Math.round(aleat);
    	
