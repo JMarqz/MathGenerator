@@ -24,16 +24,17 @@ function sumas(){
 			} else{
 				if (respuestas) {
 					// Con respuestas
-					problemas += tmp + " (R: " + resultadoEjercicio + ")" + "\n";
+					problemas += tmp + " (R: " + resultadoEjercicio + ")" + "<br>";
 				} else{
-					problemas += tmp + "\n";
+					problemas += tmp + "<br>";
 				}
 			}
 		}
 		resultadoEjercicio = 0;
 	};
 	
-	document.getElementById("resultado").value = problemas;
+	//document.getElementById("resultado").value = problemas;
+	$("#resultado").append(problemas);
 }
 
 
@@ -124,9 +125,9 @@ function restas(){
 			} else{
 				if (respuestas) {
 					// Con respuestas
-					problemas += tmp + " (R: " + resultadoEjercicio + ")" + "\n";
+					problemas += tmp + " (R: " + resultadoEjercicio + ")" + "<br>";
 				} else{
-					problemas += tmp + "\n";
+					problemas += tmp + "<br>";
 				}
 			}
 		}

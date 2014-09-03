@@ -53,19 +53,23 @@ function expFijo(){
 
 	var problemas = "";
 	var resultadoEjercicio = 1;
+	var exp = exponente(nExp);
 
 	// Mostrando las respuestas
 	for(var i=0; i<arrayExpFijo.length; i++){
 		var tmp = arrayExpFijo[i];
 		if (respuestas) {
-			problemas += tmp + "^" + nExp + "R: (" + Math.pow(tmp,nExp) + ")";
+			//problemas += tmp + "^" + exp + "R: (" + Math.pow(tmp,nExp) + ")";
+			problemas += tmp + exp + " R: (" + Math.pow(tmp,nExp) + ")";
 		} else{
-			problemas += tmp + "^" + nExp;
+			//problemas += tmp + "^" + exp;
+			problemas += tmp + exp;
 		}
-		problemas += "\n";
+		problemas += "<br>";
 	}
 
-	document.getElementById("resultado").value = problemas;
+	//document.getElementById("resultado").value = problemas;
+	$("#resultado").append(problemas);
 }
 
 
@@ -95,7 +99,7 @@ function expVariable(){
 			var expVarTmp = aleatorio(nExpMax,nExpMin);
 			var resultadoEjercicio = Math.pow(tmp,expVarTmp);
 
-			problemas += tmp + "^" + expVarTmp + "R: (" + resultadoEjercicio + ")";
+			problemas += tmp + "^" + expVarTmp + " R: (" + resultadoEjercicio + ")";
 		} else{
 			problemas += tmp + "^" + expVarTmp;
 		}
