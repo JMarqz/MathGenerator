@@ -24,6 +24,10 @@
 	overflow: auto!important;
 }
 
+.centrar{
+	text-align: center!important;
+}
+
 /* TEXTO EN LIST */
 .ui-listview a{
 	font-weight: normal!important;
