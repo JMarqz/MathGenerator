@@ -58,8 +58,9 @@ function exponente(expHTML){
 
 // COPIAR
 function copiar(){
-	var texto = document.getElementById("resultado").value;
+	var texto = document.getElementById("resultado").innerHTML;
 	var copiar = texto.replace(/<br>/g, "\n");
+	alert(texto);
 
 	window.plugins.clipboard.copy(
 		copiar,
@@ -74,7 +75,7 @@ function copiar(){
 
 // IMPRIMIR
 function imprimir(){
-	var imprimir = document.getElementById("resultado").value;
+	var imprimir = document.getElementById("resultado").innerHTML;
 	//var imprimir = contenido.replace(/\n/g, "<br>");
 
 	window.plugin.printer.isServiceAvailable(
