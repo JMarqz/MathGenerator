@@ -1,6 +1,4 @@
-/////////////////////////////////////////////////////////////
-/////				FUNCIONES GENERALES					/////
-/////////////////////////////////////////////////////////////
+
 // DEVICEREADY
 document.addEventListener("deviceready", onDeviceReady, false);
 
@@ -36,25 +34,6 @@ function crearArray(f, c, nMax, nMin){
 	return array;
 }
 
-// OBTENER EXPONENTE
-function exponente(expHTML){
-	var exp = "";
-
-	switch(expHTML){
-		case '2': exp = "²"; break;
-		case '3': exp = "³"; break;
-		case '4': exp = "⁴"; break;
-		case '5': exp = "⁵"; break;
-		case '6': exp = "⁶"; break;
-		case '7': exp = "⁷"; break;
-		case '8': exp = "⁸"; break;
-		case '9': exp = "⁹"; break;
-		case '10': exp = "¹⁰"; break;
-	}
-	
-	return exp;
-}
-
 
 // COPIAR
 function copiar(){
@@ -85,7 +64,6 @@ function copiar(){
 // IMPRIMIR
 function imprimir(){
 	var imprimir = document.getElementById("resultado").innerHTML;
-	//var imprimir = contenido.replace(/\n/g, "<br>");
 
 	window.plugin.printer.isServiceAvailable(
 	    function (isAvailable) {

@@ -31,7 +31,7 @@ function factoriales(){
 		resultadoEjercicio = 1;
 	}
 
-	$("#resultado").append(problemas);
+	document.getElementById("resultado").innerHTML = problemas;
 }
 
 
@@ -68,7 +68,7 @@ function expFijo(){
 		problemas += "<br>";
 	}
 	
-	$("#resultado").append(problemas);
+	document.getElementById("resultado").innerHTML = problemas;
 }
 
 
@@ -105,7 +105,7 @@ function expVariable(){
 		problemas += "<br>";
 	}
 
-	$("#resultado").append(problemas);
+	document.getElementById("resultado").innerHTML = problemas;
 }
 
 

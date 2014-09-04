@@ -34,7 +34,7 @@ function sumas(){
 		resultadoEjercicio = 0;
 	};
 	
-	$("#resultado").append(problemas);
+	document.getElementById("resultado").innerHTML = problemas;
 }
 
 
@@ -135,7 +135,7 @@ function restas(){
 		resultadoEjercicio = 1;
 	};
 	
-	$("#resultado").append(problemas);
+	document.getElementById("resultado").innerHTML = problemas;
 }
 
 
@@ -175,7 +175,7 @@ function multiplicaciones(){
 		resultadoEjercicio = 1;
 	};
 	
-	$("#resultado").append(problemas);
+	document.getElementById("resultado").innerHTML = problemas;
 }
 
 
@@ -252,5 +252,5 @@ function divisiones(){
 		resultadoEjercicio = 1;
 	};
 	
-	$("#resultado").append(problemas);
+	document.getElementById("resultado").innerHTML = problemas;
 }
