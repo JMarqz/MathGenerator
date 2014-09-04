@@ -27,11 +27,11 @@ function factoriales(){
 		} else{
 			problemas += tmp + "!";
 		}
-		problemas += "\n";
+		problemas += "<br>";
 		resultadoEjercicio = 1;
 	}
 
-	document.getElementById("resultado").value = problemas;
+	$("#resultado").append(problemas);
 }
 
 
@@ -53,22 +53,21 @@ function expFijo(){
 
 	var problemas = "";
 	var resultadoEjercicio = 1;
-	var exp = exponente(nExp);
+	//var exp = exponente(nExp);
 
 	// Mostrando las respuestas
 	for(var i=0; i<arrayExpFijo.length; i++){
 		var tmp = arrayExpFijo[i];
 		if (respuestas) {
 			//problemas += tmp + "^" + exp + "R: (" + Math.pow(tmp,nExp) + ")";
-			problemas += tmp + exp + " R: (" + Math.pow(tmp,nExp) + ")";
+			problemas += tmp + "<sup>" + nExp + "</sup>" + " R: (" + Math.pow(tmp,nExp) + ")";
 		} else{
 			//problemas += tmp + "^" + exp;
 			problemas += tmp + exp;
 		}
 		problemas += "<br>";
 	}
-
-	//document.getElementById("resultado").value = problemas;
+	
 	$("#resultado").append(problemas);
 }
 
@@ -99,14 +98,14 @@ function expVariable(){
 			var expVarTmp = aleatorio(nExpMax,nExpMin);
 			var resultadoEjercicio = Math.pow(tmp,expVarTmp);
 
-			problemas += tmp + "^" + expVarTmp + " R: (" + resultadoEjercicio + ")";
+			problemas += tmp + "<sup>" + expVarTmp + "</sup>" + " R: (" + resultadoEjercicio + ")";
 		} else{
-			problemas += tmp + "^" + expVarTmp;
+			problemas += tmp + "<sup>" + expVarTmp + "</sup>";
 		}
-		problemas += "\n";
+		problemas += "<br>";
 	}
 
-	document.getElementById("resultado").value = problemas;
+	$("#resultado").append(problemas);
 }
 
 

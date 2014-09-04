@@ -24,16 +24,16 @@ function sumas(){
 			} else{
 				if (respuestas) {
 					// Con respuestas
-					problemas += tmp + " (R: " + resultadoEjercicio + ")" + "<br>";
+					problemas += tmp + " (R: " + resultadoEjercicio + ")";
 				} else{
-					problemas += tmp + "<br>";
+					problemas += tmp;
 				}
+				problemas += "<br>";
 			}
 		}
 		resultadoEjercicio = 0;
 	};
 	
-	//document.getElementById("resultado").value = problemas;
 	$("#resultado").append(problemas);
 }
 
@@ -125,16 +125,17 @@ function restas(){
 			} else{
 				if (respuestas) {
 					// Con respuestas
-					problemas += tmp + " (R: " + resultadoEjercicio + ")" + "<br>";
+					problemas += tmp + " (R: " + resultadoEjercicio + ")";
 				} else{
-					problemas += tmp + "<br>";
+					problemas += tmp;
 				}
+				problemas += "<br>";
 			}
 		}
 		resultadoEjercicio = 1;
 	};
 	
-	document.getElementById("resultado").value = problemas;
+	$("#resultado").append(problemas);
 }
 
 
@@ -164,16 +165,17 @@ function multiplicaciones(){
 			} else{
 				if (respuestas) {
 					// Con respuestas
-					problemas += tmp + " (R: " + resultadoEjercicio + ")" + "\n";
+					problemas += tmp + " (R: " + resultadoEjercicio + ")";
 				} else{
-					problemas += tmp + "\n";
+					problemas += tmp;
 				}
+				problemas += "<br>";
 			}
 		}
 		resultadoEjercicio = 1;
 	};
 	
-	document.getElementById("resultado").value = problemas;
+	$("#resultado").append(problemas);
 }
 
 
@@ -240,14 +242,15 @@ function divisiones(){
 			} else{
 				if (respuestas) {
 					// Con respuestas
-					problemas += tmp + " (R: " + resultadoEjercicio + ")" + "\n";
+					problemas += tmp + " (R: " + resultadoEjercicio + ")";
 				} else{
-					problemas += tmp + "\n";
+					problemas += tmp;
 				}
+				problemas += "<br>";
 			}
 		}
 		resultadoEjercicio = 1;
 	};
 	
-	document.getElementById("resultado").value = problemas;
+	$("#resultado").append(problemas);
 }
