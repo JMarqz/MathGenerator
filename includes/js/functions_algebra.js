@@ -107,6 +107,38 @@ function expVariable(){
 }
 
 
+// CONVERTIR NÚMEROS AL INICIO DEL PROBLEMA
+function truncarNumero(num){
+	var tmp = "";
+
+	switch(num){
+		case 1: tmp = ""; break;
+		case -1: tmp = "-"; break;
+		default: tmp = num; break;
+	}
+
+	return tmp;
+}
+
+
+// CONVERTIR NÚMEROS EN EL CUERPO DEL PROBLEMA
+function truncarNumeroCuerpo(num){
+	var tmp = "";
+
+	if (num == 1) {
+		tmp = "+";
+	} else if(num == -1){
+		tmp = "-";
+	} else if(num > 1){
+		tmp = "+" + num;
+	} else {
+		tmp = num;
+	}
+
+	return tmp;
+}
+
+
 // EXPRESIONES ALGEBRAICAS EXPONENTE FIJO
 function exprAlgFijo(){
 	var nEjercicios = document.getElementById("nEjercicios").value;
@@ -126,6 +158,7 @@ function exprAlgFijo(){
 	];
 
 	var problemas = "";
+	var tmp = "";
 	var suma = 0;
 
 
@@ -145,32 +178,27 @@ function exprAlgFijo(){
 					if (nAleatorio == 0) {
 						// Eliminar los 0's de los problemas
 						j--;
-					} else if(nAleatorio > 0){
-						// Números positivos
-						if (j==0) {
-							problemas += nAleatorio + literal + "<sup>" + nExp + "</sup>";
-						} else if (nAleatorio == 1) {
-							// No mostrar los 1's
-							problemas += "+" + literal + "<sup>" + nExp + "</sup>";
-						} else{
-							problemas += "+" + nAleatorio + literal + "<sup>" + nExp + "</sup>";
-						}
 					} else{
-						// Números negativos: mostrarlos con su signo
-						problemas += nAleatorio + literal + "<sup>" + nExp + "</sup>";
-					};
+						if (j==0) {
+							tmp = truncarNumero(nAleatorio);
+						} else{
+							tmp = truncarNumeroCuerpo(nAleatorio);
+						}
+
+						problemas += tmp + literal + "<sup>" + nExp + "</sup>";
+					}
 
 					suma += nAleatorio;
 
 					// Seperación de líneas y resultados
 					if (j == nTerminos-1) {
 						if (respuestas) {
+							var respuestaTMP = truncarNumero(suma);
+
 							if (suma != 0) {
-								problemas += " R: [" + suma + literal + "<sup>" + nExp + "</sup>" + "]";
-							} else if(suma == 1){
-								problemas += " R: [" + literal + "<sup>" + nExp + "</sup>" + "]";
-							}else{
-								problemas += " R: [" + suma + "]";
+								problemas += " R: [" + respuestaTMP + literal + "<sup>" + nExp + "</sup>" + "]";
+							} else{
+								problemas += " R: [" + respuestaTMP + "]";
 							}
 						}
 						problemas += "<br>";
@@ -182,30 +210,26 @@ function exprAlgFijo(){
 					if (nAleatorio == 0) {
 						// Eliminar los 0's de los problemas
 						j--;
-					} else if(nAleatorio > 0){
-						// Números positivos
+					} else {
 						if (j==0) {
-							problemas += nAleatorio + literal;
-						} else if (nAleatorio == 1) {
-							// No mostrar los 1's
-							problemas += "+" + literal;
+							tmp = truncarNumero(nAleatorio);
 						} else{
-							problemas += "+" + nAleatorio + literal;
+							tmp = truncarNumeroCuerpo(nAleatorio);
 						}
-					} else{
-						// Números negativos: mostrarlos con su signo
-						problemas += nAleatorio + literal;
-					};
+						problemas += tmp + literal;
+					}
 
 					suma += nAleatorio;
 
 					// Seperación de líneas y resultados
 					if (j == nTerminos-1) {
 						if (respuestas) {
+							var respuestaTMP = truncarNumero(suma);
+
 							if (suma != 0) {
-								problemas += " R: [" + suma + literal + "]";
+								problemas += " R: [" + respuestaTMP + literal + "]";
 							} else{
-								problemas += " R: [" + suma + "]";
+								problemas += " R: [" + respuestaTMP + "]";
 							}
 						}
 						problemas += "<br>";
@@ -227,19 +251,13 @@ function exprAlgFijo(){
 				if (nExp > 1) { // Exponentes cuadráticos y mayores
 					if (nAleatorio == 0) {
 						j--;
-					} else if(nAleatorio > 0){
-						// Números positivos
-						if (j==0) {
-							problemas += nAleatorio + literal1 + "<sup>" + nExp + "</sup>" + literal2 + "<sup>" + nExp + "</sup>";
-						} else if (nAleatorio == 1) {
-							// No mostrar los 1's
-							problemas += "+" + literal1 + "<sup>" + nExp + "</sup>" + literal2 + "<sup>" + nExp + "</sup>";
-						} else{
-							problemas += "+" + nAleatorio + literal1 + "<sup>" + nExp + "</sup>" + literal2 + "<sup>" + nExp + "</sup>";
-						}
 					} else{
-						// Números negativos: mostrarlos con su signo
-						problemas += nAleatorio + literal1 + "<sup>" + nExp + "</sup>" + literal2 + "<sup>" + nExp + "</sup>";
+						if (j==0) {
+							tmp = truncarNumero(nAleatorio);
+						} else{
+							tmp = truncarNumeroCuerpo(nAleatorio);
+						}
+						problemas += tmp + literal1 + "<sup>" + nExp + "</sup>" + literal2 + "<sup>" + nExp + "</sup>";
 					}
 
 					suma += nAleatorio;
@@ -247,10 +265,12 @@ function exprAlgFijo(){
 					// Resultados
 					if (j == nTerminos-1) {
 						if (respuestas) {
+							var respuestaTMP = truncarNumero(suma);
+
 							if (suma != 0) {
-								problemas += " R: [" + suma + literal1 + "<sup>" + nExp + "</sup>" + literal2 + "<sup>" + nExp + "</sup>" + "]";
+								problemas += " R: [" + respuestaTMP + literal1 + "<sup>" + nExp + "</sup>" + literal2 + "<sup>" + nExp + "</sup>" + "]";
 							} else{
-								problemas += " R: [" + suma + "]";
+								problemas += " R: [" + respuestaTMP + "]";
 							}
 						}
 						problemas += "<br>";
@@ -260,19 +280,14 @@ function exprAlgFijo(){
 				} else { // Exponentes lineales
 					if (nAleatorio == 0) {
 						j--;
-					} else if(nAleatorio > 0){
-						// Números positivos
-						if (j==0) {
-							problemas += nAleatorio + literal1 + literal2;
-						} else if (nAleatorio == 1) {
-							// No mostrar los 1's
-							problemas += "+" + literal1 + literal2;
-						} else{
-							problemas += "+" + nAleatorio + literal1 + literal2;
-						}
 					} else{
-						// Números negativos: mostrarlos con su signo
-						problemas += nAleatorio + literal1 + literal2;
+						if (j==0) {
+							tmp = truncarNumero(nAleatorio);
+						} else{
+							tmp = truncarNumeroCuerpo(nAleatorio);
+						}
+
+						problemas += tmp + literal1 + literal2;
 					}
 
 					suma += nAleatorio;
@@ -280,10 +295,12 @@ function exprAlgFijo(){
 					// Seperación de líneas y resultados
 					if (j == nTerminos-1) {
 						if (respuestas) {
+							var respuestaTMP = truncarNumero(suma);
+
 							if (suma != 0) {
-								problemas += " R: [" + suma + literal1 + literal2 + "]";
+								problemas += " R: [" + respuestaTMP + literal1 + literal2 + "]";
 							} else{
-								problemas += " R: [" + suma + "]";
+								problemas += " R: [" + respuestaTMP + "]";
 							}
 						}
 						problemas += "<br>";
@@ -338,30 +355,27 @@ function exprAlgVariable(){
 					if (nAleatorio == 0) {
 						// Eliminar los 0's de los problemas
 						j--;
-					} else if(nAleatorio > 0){
-						// Números positivos
+					} else {
 						if (j==0) {
-							problemas += nAleatorio + literal + "<sup>" + expAleatorio + "</sup>";
-						} else if (nAleatorio == 1) {
-							// No mostrar los 1's
-							problemas += "+" + literal + "<sup>" + expAleatorio + "</sup>";
+							tmp = truncarNumero(nAleatorio);
 						} else{
-							problemas += "+" + nAleatorio + literal + "<sup>" + expAleatorio + "</sup>";
+							tmp = truncarNumeroCuerpo(nAleatorio);
 						}
-					} else{
-						// Números negativos: mostrarlos con su signo
-						problemas += nAleatorio + literal + "<sup>" + expAleatorio + "</sup>";
-					};
+
+						problemas += tmp + literal + "<sup>" + expAleatorio + "</sup>";
+					}
 
 					suma += nAleatorio;
 
 					// Seperación de líneas y resultados
 					if (j == nTerminos-1) {
 						if (respuestas) {
+							var respuestaTMP = truncarNumero(suma);
+
 							if (suma != 0) {
-								problemas += " R: [" + suma + literal + "<sup>" + expAleatorio + "</sup>" + "]";
+								problemas += " R: [" + respuestaTMP + literal + "<sup>" + expAleatorio + "</sup>" + "]";
 							} else{
-								problemas += " R: [" + suma + "]";
+								problemas += " R: [" + respuestaTMP + "]";
 							}
 						}
 						problemas += "<br>";
@@ -373,30 +387,27 @@ function exprAlgVariable(){
 					if (nAleatorio == 0) {
 						// Eliminar los 0's de los problemas
 						j--;
-					} else if(nAleatorio > 0){
-						// Números positivos
+					} else {
 						if (j==0) {
-							problemas += nAleatorio + literal;
-						} else if (nAleatorio == 1) {
-							// No mostrar los 1's
-							problemas += "+" + literal;
+							tmp = truncarNumero(nAleatorio);
 						} else{
-							problemas += "+" + nAleatorio + literal;
+							tmp = truncarNumeroCuerpo(nAleatorio);
 						}
-					} else{
-						// Números negativos: mostrarlos con su signo
-						problemas += nAleatorio + literal;
-					};
+
+						problemas += tmp + literal;
+					}
 
 					suma += nAleatorio;
 
 					// Seperación de líneas y resultados
 					if (j == nTerminos-1) {
 						if (respuestas) {
+							var respuestaTMP = truncarNumero(suma);
+
 							if (suma != 0) {
-								problemas += " R: [" + suma + literal + "]";
+								problemas += " R: [" + respuestaTMP + literal + "]";
 							} else{
-								problemas += " R: [" + suma + "]";
+								problemas += " R: [" + respuestaTMP + "]";
 							}
 						}
 						problemas += "<br>";
@@ -421,30 +432,27 @@ function exprAlgVariable(){
 				if (expAleatorio_1 > 1) { // Exponentes cuadráticos y mayores
 					if (nAleatorio == 0) {
 						j--;
-					} else if(nAleatorio > 0){
-						// Números positivos
-						if (j==0) {
-							problemas += nAleatorio + literal1 + "<sup>" + expAleatorio_1 + "</sup>" + literal2 + "<sup>" + expAleatorio_2 + "</sup>";
-						} else if (nAleatorio == 1) {
-							// No mostrar los 1's
-							problemas += "+" + literal1 + "<sup>" + expAleatorio_1 + "</sup>" + literal2 + "<sup>" + expAleatorio_2 + "</sup>";
-						} else{
-							problemas += "+" + nAleatorio + literal1 + "<sup>" + expAleatorio_1 + "</sup>" + literal2 + "<sup>" + expAleatorio_2 + "</sup>";
-						}
 					} else{
-						// Números negativos: mostrarlos con su signo
-						problemas += nAleatorio + literal1 + "<sup>" + expAleatorio_1 + "</sup>" + literal2 + "<sup>" + expAleatorio_2 + "</sup>";
+						if (j==0) {
+							tmp = truncarNumero(nAleatorio);
+						} else{
+							tmp = truncarNumeroCuerpo(nAleatorio);
+						}
+
+						problemas += tmp + literal1 + "<sup>" + expAleatorio_1 + "</sup>" + literal2 + "<sup>" + expAleatorio_2 + "</sup>";
 					}
 
 					suma += nAleatorio;
 
 					// Resultados
 					if (j == nTerminos-1) {
+						var respuestaTMP = truncarNumero(suma);
+
 						if (respuestas) {
 							if (suma != 0) {
-								problemas += " R: [" + suma + literal1 + "<sup>" + expAleatorio_1 + "</sup>" + literal2 + "<sup>" + expAleatorio_2 + "</sup>" + "]";
+								problemas += " R: [" + respuestaTMP + literal1 + "<sup>" + expAleatorio_1 + "</sup>" + literal2 + "<sup>" + expAleatorio_2 + "</sup>" + "]";
 							} else{
-								problemas += " R: [" + suma + "]";
+								problemas += " R: [" + respuestaTMP + "]";
 							}
 						}
 						problemas += "<br>";
@@ -454,19 +462,14 @@ function exprAlgVariable(){
 				} else { // Exponentes lineales
 					if (nAleatorio == 0) {
 						j--;
-					} else if(nAleatorio > 0){
-						// Números positivos
-						if (j==0) {
-							problemas += nAleatorio + literal1 + literal2;
-						} else if (nAleatorio == 1) {
-							// No mostrar los 1's
-							problemas += "+" + literal1 + literal2;
-						} else{
-							problemas += "+" + nAleatorio + literal1 + literal2;
-						}
 					} else{
-						// Números negativos: mostrarlos con su signo
-						problemas += nAleatorio + literal1 + literal2;
+						if (j==0) {
+							tmp = truncarNumero(nAleatorio);
+						} else{
+							tmp = truncarNumeroCuerpo(nAleatorio);
+						}
+
+						problemas += tmp + literal1 + literal2;
 					}
 
 					suma += nAleatorio;
@@ -474,10 +477,12 @@ function exprAlgVariable(){
 					// Seperación de líneas y resultados
 					if (j == nTerminos-1) {
 						if (respuestas) {
+							var respuestaTMP = truncarNumero(suma);
+							
 							if (suma != 0) {
-								problemas += " R: [" + suma + literal1 + literal2 + "]";
+								problemas += " R: [" + respuestaTMP + literal1 + literal2 + "]";
 							} else{
-								problemas += " R: [" + suma + "]";
+								problemas += " R: [" + respuestaTMP + "]";
 							}
 						}
 						problemas += "<br>";
