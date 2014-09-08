@@ -53,7 +53,6 @@ function expFijo(){
 
 	var problemas = "";
 	var resultadoEjercicio = 1;
-	//var exp = exponente(nExp);
 
 	// Mostrando las respuestas
 	for(var i=0; i<arrayExpFijo.length; i++){
@@ -138,6 +137,17 @@ function truncarNumeroCuerpo(num){
 	return tmp;
 }
 
+function truncarExponente(numExp){
+	var tmp = "";
+
+	switch(numExp){
+		case 1: tmp = ""; break;
+		default: tmp = numExp; break;
+	}
+
+	return tmp;
+}
+
 
 // EXPRESIONES ALGEBRAICAS EXPONENTE FIJO
 function exprAlgFijo(){
@@ -158,12 +168,13 @@ function exprAlgFijo(){
 	];
 
 	var problemas = "";
-	var tmp = "";
+	var numTruncado = "";
 	var suma = 0;
 
 
 	//Creando problemas
 	for(var i=0; i<nEjercicios; i++){
+		
 		// Una literal
 		if (nLiterales == 1) {
 			var seleccionLiteral = aleatorio(0,literales.length-1);
@@ -172,72 +183,37 @@ function exprAlgFijo(){
 			// Crear 'n' términos
 			for(var j=0; j<nTerminos; j++){
 				var nAleatorio = aleatorio(nMin, nMax);
+				var exponenteTruncado = truncarExponente(parseInt(nExp));
 
-				// Exponentes cuadráticos o mayores
-				if (nExp > 1) {
-					if (nAleatorio == 0) {
-						// Eliminar los 0's de los problemas
-						j--;
-					} else{
-						if (j==0) {
-							tmp = truncarNumero(nAleatorio);
-						} else{
-							tmp = truncarNumeroCuerpo(nAleatorio);
-						}
-
-						problemas += tmp + literal + "<sup>" + nExp + "</sup>";
-					}
-
-					suma += nAleatorio;
-
-					// Seperación de líneas y resultados
-					if (j == nTerminos-1) {
-						if (respuestas) {
-							var respuestaTMP = truncarNumero(suma);
-
-							if (suma != 0) {
-								problemas += " R: [" + respuestaTMP + literal + "<sup>" + nExp + "</sup>" + "]";
-							} else{
-								problemas += " R: [" + respuestaTMP + "]";
-							}
-						}
-						problemas += "<br>";
-						suma = 0;
-					}
-
+				if (nAleatorio == 0) {
+					j--; // Eliminar los 0's de los problemas
 				} else{
-					// Exponentes lineales
-					if (nAleatorio == 0) {
-						// Eliminar los 0's de los problemas
-						j--;
-					} else {
-						if (j==0) {
-							tmp = truncarNumero(nAleatorio);
+					if (j==0) {
+						numTruncado = truncarNumero(nAleatorio);
+					} else{
+						numTruncado = truncarNumeroCuerpo(nAleatorio);
+					}
+
+					problemas += numTruncado + literal + "<sup>" + exponenteTruncado + "</sup>";
+				}
+
+				suma += nAleatorio;
+
+				// Seperación de líneas y resultados
+				if (j == nTerminos-1) {
+					if (respuestas) {
+						var respuestaTMP = truncarNumero(suma);
+
+						if (suma != 0) {
+							problemas += " R: [" + respuestaTMP + literal + "<sup>" + exponenteTruncado + "</sup>" + "]";
 						} else{
-							tmp = truncarNumeroCuerpo(nAleatorio);
+							problemas += " R: [" + respuestaTMP + "]";
 						}
-						problemas += tmp + literal;
 					}
-
-					suma += nAleatorio;
-
-					// Seperación de líneas y resultados
-					if (j == nTerminos-1) {
-						if (respuestas) {
-							var respuestaTMP = truncarNumero(suma);
-
-							if (suma != 0) {
-								problemas += " R: [" + respuestaTMP + literal + "]";
-							} else{
-								problemas += " R: [" + respuestaTMP + "]";
-							}
-						}
-						problemas += "<br>";
-						suma = 0;
-					}
+					problemas += "<br>";
+					suma = 0;
 				}
 			}
-			
 
 		} else{
 			// Dos literales
@@ -247,66 +223,35 @@ function exprAlgFijo(){
 
 			for(var j=0; j<nTerminos; j++){
 				var nAleatorio = aleatorio(nMin, nMax);
+				var exponenteTruncado = truncarExponente(parseInt(nExp));
 
-				if (nExp > 1) { // Exponentes cuadráticos y mayores
-					if (nAleatorio == 0) {
-						j--;
+				if (nAleatorio == 0) {
+					j--;
+				} else{
+					if (j==0) {
+						numTruncado = truncarNumero(nAleatorio);
 					} else{
-						if (j==0) {
-							tmp = truncarNumero(nAleatorio);
+						numTruncado = truncarNumeroCuerpo(nAleatorio);
+					}
+					problemas += numTruncado + literal1 + "<sup>" + exponenteTruncado + "</sup>" + literal2 + "<sup>" + exponenteTruncado + "</sup>";
+				}
+
+				suma += nAleatorio;
+
+				// Resultados
+				if (j == nTerminos-1) {
+					if (respuestas) {
+						var respuestaTMP = truncarNumero(suma);
+
+						if (suma != 0) {
+							problemas += " R: [" + respuestaTMP + literal1 + "<sup>" + exponenteTruncado + "</sup>" + literal2 + "<sup>" + exponenteTruncado + "</sup>" + "]";
 						} else{
-							tmp = truncarNumeroCuerpo(nAleatorio);
+							problemas += " R: [" + respuestaTMP + "]";
 						}
-						problemas += tmp + literal1 + "<sup>" + nExp + "</sup>" + literal2 + "<sup>" + nExp + "</sup>";
 					}
-
-					suma += nAleatorio;
-
-					// Resultados
-					if (j == nTerminos-1) {
-						if (respuestas) {
-							var respuestaTMP = truncarNumero(suma);
-
-							if (suma != 0) {
-								problemas += " R: [" + respuestaTMP + literal1 + "<sup>" + nExp + "</sup>" + literal2 + "<sup>" + nExp + "</sup>" + "]";
-							} else{
-								problemas += " R: [" + respuestaTMP + "]";
-							}
-						}
-						problemas += "<br>";
-						suma = 0;
-					}
-
-				} else { // Exponentes lineales
-					if (nAleatorio == 0) {
-						j--;
-					} else{
-						if (j==0) {
-							tmp = truncarNumero(nAleatorio);
-						} else{
-							tmp = truncarNumeroCuerpo(nAleatorio);
-						}
-
-						problemas += tmp + literal1 + literal2;
-					}
-
-					suma += nAleatorio;
-
-					// Seperación de líneas y resultados
-					if (j == nTerminos-1) {
-						if (respuestas) {
-							var respuestaTMP = truncarNumero(suma);
-
-							if (suma != 0) {
-								problemas += " R: [" + respuestaTMP + literal1 + literal2 + "]";
-							} else{
-								problemas += " R: [" + respuestaTMP + "]";
-							}
-						}
-						problemas += "<br>";
-						suma = 0;
-					}
-				}				
+					problemas += "<br>";
+					suma = 0;
+				}
 			}
 		}
 	}
@@ -315,7 +260,7 @@ function exprAlgFijo(){
 }
 
 
-// EXPRESIONES ALGEBRAICAS EXPONENTE VARIABLE
+// EXPRESIONES ALGEBRAICAS EXPONENTE VARIABLE - normal: 178 lineas, breve: 112
 function exprAlgVariable(){
 	var nEjercicios = document.getElementById("nEjercicios").value;
 	var nMax = document.getElementById("rango-max").value;
@@ -349,146 +294,79 @@ function exprAlgVariable(){
 			// Crear 'n' términos
 			for(var j=0; j<nTerminos; j++){
 				var nAleatorio = aleatorio(nMin, nMax);
+				var exponenteTruncado = truncarExponente(expAleatorio);
 
 				// Exponentes mayores cuadráticos o mayores
-				if (expAleatorio > 1) {
-					if (nAleatorio == 0) {
-						// Eliminar los 0's de los problemas
-						j--;
-					} else {
-						if (j==0) {
-							tmp = truncarNumero(nAleatorio);
+				if (nAleatorio == 0) {
+					j--; // Eliminar los 0's de los problemas
+				} else {
+					if (j==0) {
+						tmp = truncarNumero(nAleatorio);
+					} else{
+						tmp = truncarNumeroCuerpo(nAleatorio);
+					}
+
+					problemas += tmp + literal + "<sup>" + exponenteTruncado + "</sup>";
+				}
+
+				suma += nAleatorio;
+
+				// Seperación de líneas y resultados
+				if (j == nTerminos-1) {
+					if (respuestas) {
+						var respuestaTMP = truncarNumero(suma);
+
+						if (suma != 0) {
+							problemas += " R: [" + respuestaTMP + literal + "<sup>" + exponenteTruncado + "</sup>" + "]";
 						} else{
-							tmp = truncarNumeroCuerpo(nAleatorio);
+							problemas += " R: [" + respuestaTMP + "]";
 						}
-
-						problemas += tmp + literal + "<sup>" + expAleatorio + "</sup>";
 					}
-
-					suma += nAleatorio;
-
-					// Seperación de líneas y resultados
-					if (j == nTerminos-1) {
-						if (respuestas) {
-							var respuestaTMP = truncarNumero(suma);
-
-							if (suma != 0) {
-								problemas += " R: [" + respuestaTMP + literal + "<sup>" + expAleatorio + "</sup>" + "]";
-							} else{
-								problemas += " R: [" + respuestaTMP + "]";
-							}
-						}
-						problemas += "<br>";
-						suma = 0;
-					}
-
-				} else{
-					// Exponentes lineales
-					if (nAleatorio == 0) {
-						// Eliminar los 0's de los problemas
-						j--;
-					} else {
-						if (j==0) {
-							tmp = truncarNumero(nAleatorio);
-						} else{
-							tmp = truncarNumeroCuerpo(nAleatorio);
-						}
-
-						problemas += tmp + literal;
-					}
-
-					suma += nAleatorio;
-
-					// Seperación de líneas y resultados
-					if (j == nTerminos-1) {
-						if (respuestas) {
-							var respuestaTMP = truncarNumero(suma);
-
-							if (suma != 0) {
-								problemas += " R: [" + respuestaTMP + literal + "]";
-							} else{
-								problemas += " R: [" + respuestaTMP + "]";
-							}
-						}
-						problemas += "<br>";
-						suma = 0;
-					}
+					problemas += "<br>";
+					suma = 0;
 				}
 			}
-			
 
 		} else{
 			// Dos literales
 			var seleccionLiteralPar = aleatorio(0,literalesPar.length-1);
 			var literal1 = literalesPar[seleccionLiteralPar][0];
 			var literal2 = literalesPar[seleccionLiteralPar][1];
-			var expAleatorio_1 = aleatorio(expMin, expMax);
-			var expAleatorio_2 = aleatorio(expMin, expMax);
+			var expAleatorio_1 = truncarExponente(aleatorio(expMin, expMax));
+			var expAleatorio_2 = truncarExponente(aleatorio(expMin, expMax));
 
 
 			for(var j=0; j<nTerminos; j++){
 				var nAleatorio = aleatorio(nMin, nMax);
 
-				if (expAleatorio_1 > 1) { // Exponentes cuadráticos y mayores
-					if (nAleatorio == 0) {
-						j--;
+				if (nAleatorio == 0) {
+					j--;
+				} else{
+					if (j==0) {
+						tmp = truncarNumero(nAleatorio);
 					} else{
-						if (j==0) {
-							tmp = truncarNumero(nAleatorio);
+						tmp = truncarNumeroCuerpo(nAleatorio);
+					}
+
+					problemas += tmp + literal1 + "<sup>" + expAleatorio_1 + "</sup>" + literal2 + "<sup>" + expAleatorio_2 + "</sup>";
+				}
+
+				suma += nAleatorio;
+
+				// Resultados
+				if (j == nTerminos-1) {
+					var respuestaTMP = truncarNumero(suma);
+
+					if (respuestas) {
+						if (suma != 0) {
+							problemas += " R: [" + respuestaTMP + literal1 + "<sup>" + expAleatorio_1 + "</sup>" + literal2 + "<sup>" + expAleatorio_2 + "</sup>" + "]";
 						} else{
-							tmp = truncarNumeroCuerpo(nAleatorio);
+							problemas += " R: [" + respuestaTMP + "]";
 						}
-
-						problemas += tmp + literal1 + "<sup>" + expAleatorio_1 + "</sup>" + literal2 + "<sup>" + expAleatorio_2 + "</sup>";
 					}
-
-					suma += nAleatorio;
-
-					// Resultados
-					if (j == nTerminos-1) {
-						var respuestaTMP = truncarNumero(suma);
-
-						if (respuestas) {
-							if (suma != 0) {
-								problemas += " R: [" + respuestaTMP + literal1 + "<sup>" + expAleatorio_1 + "</sup>" + literal2 + "<sup>" + expAleatorio_2 + "</sup>" + "]";
-							} else{
-								problemas += " R: [" + respuestaTMP + "]";
-							}
-						}
-						problemas += "<br>";
-						suma = 0;
-					}
-
-				} else { // Exponentes lineales
-					if (nAleatorio == 0) {
-						j--;
-					} else{
-						if (j==0) {
-							tmp = truncarNumero(nAleatorio);
-						} else{
-							tmp = truncarNumeroCuerpo(nAleatorio);
-						}
-
-						problemas += tmp + literal1 + literal2;
-					}
-
-					suma += nAleatorio;
-
-					// Seperación de líneas y resultados
-					if (j == nTerminos-1) {
-						if (respuestas) {
-							var respuestaTMP = truncarNumero(suma);
-							
-							if (suma != 0) {
-								problemas += " R: [" + respuestaTMP + literal1 + literal2 + "]";
-							} else{
-								problemas += " R: [" + respuestaTMP + "]";
-							}
-						}
-						problemas += "<br>";
-						suma = 0;
-					}
-				}				
+					problemas += "<br>";
+					suma = 0;
+				}
 			}
 		}
 	}
