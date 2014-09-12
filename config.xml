@@ -5,7 +5,7 @@
     xmlns:gap   = "http://phonegap.com/ns/1.0"
     id          = "com.jmarqz.mathgenerator"    
     version     = "1.0.0" 
-    versionCode = "100" >
+    versionCode = "1.0.0" >
 
 
     <!-- App Info -->

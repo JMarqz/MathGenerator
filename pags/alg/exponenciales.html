@@ -22,35 +22,53 @@
 	<div data-role="page" id="page" data-theme="a">		
 		<header data-role="header">
 			<a href="../algebra.html" data-icon="carat-l" data-iconpos="notext" class="ui-icon ui-nodisc-icon">Atrás</a>
-			<h1>Exponenciales, exponentes variables</h1>
+			<h1>Exponenciales</h1>
 		</header>
 
 		<div data-role="content">
-			<p class="ejemplo">De la forma: a<sup>n</sup>, exponentes variables</p>
+			<p id="ejemplo" class="ejemplo">De la forma: a<sup>n</sup>, exponentes fijos</p>
 
 			<!-- FORMULARIO -->
 			<form id="form">
 				<div data-role="rangeslider" data-mini="true" data-track-theme="b">
-			        <label for="range-1a">Rango de números a utilizar en la base (1-100)</label>
-			        <input type="range" name="rango-min" id="rango-min" min="1" max="100" value="1" >
-			        <input type="range" name="rango-max" id="rango-max" min="1" max="100" value="30">
+			        <label for="numeros-base">Rango de números a utilizar en la base (2-100)</label>
+			        <input type="range" name="numeros-base" id="base-min" min="2" max="100" value="2" >
+			        <input type="range" name="numeros-base" id="base-max" min="2" max="100" value="30">
 			    </div>
 
-			    <div data-role="rangeslider" data-mini="true" data-track-theme="b">
-			        <label for="range-1a">Rango de exponentes (1-100)</label>
-			        <input type="range" name="exp-min" id="exp-min" min="2" max="10" value="2" >
-			        <input type="range" name="exp-max" id="exp-max" min="2" max="10" value="3">
+			    <fieldset data-role="controlgroup" data-mini="true">
+			        <legend>Tipo de exponentes:</legend>
+			        <label for="exp-fijos-radio">Exponentes fijo</label>
+			        <input type="radio" name="tipo-exponentes" id="exp-fijos-radio" value="0" checked="checked">
+			        
+			        <label for="exp-variables-radio">Exponentes variables</label>
+			        <input type="radio" name="tipo-exponentes" id="exp-variables-radio" value="1">
+			    </fieldset>
+
+			    <!-- Exponentes -->
+			    <div id="exp-fijos">
+			    	<label for="exponente-fijo">Número a utilizar en el exponente (2-10)</label>
+			    	<input type="range" name="exponente-fijo" id="exponente-fijo" data-mini="true" data-track-theme="b" data-highlight="true" min="2" max="10" value="2">
 			    </div>
+
+			    <div id="exp-var" style="display: none;">
+				    <div data-role="rangeslider" data-mini="true" data-track-theme="b">
+				        <label for="exponentes-variables">Rango de números a utilizar en el exponente (2 a 10)</label>
+				        <input type="range" name="exponentes-variables" id="exp-min" min="2" max="10" value="2" >
+				        <input type="range" name="exponentes-variables" id="exp-max" min="2" max="10" value="4">
+				    </div>
+			    </div>
+			    <!-- Terminan Exponentes -->
 			    
-			    <label for="number">Número de ejercicios a generar (1-100)</label>
-			    <input type="range" name="number" id="number" data-mini="true" data-track-theme="b" data-highlight="true" min="1" max="100" value="10">
+			    <label for="ejercicios">Número de ejercicios a generar (1-100)</label>
+			    <input type="range" name="ejercicios" id="ejercicios" data-mini="true" data-track-theme="b" data-highlight="true" min="1" max="100" value="10">
 			    
 			    <label for="respuestas">Incluir respuestas</label>
 			    <input type="checkbox" name="respuestas" id="respuestas" data-mini="true">
 			</form>
 
 			<!-- BTN GENERAR -->
-			<a href="#popupDialog" data-rel="popup" data-position-to="window" data-transition="pop" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" onClick="expVariable()">Generar</a>			
+			<a href="#popupDialog" data-rel="popup" data-position-to="window" data-transition="pop" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" onClick="exponenciales()">Generar</a>			
 
 
 			<!-- CUADRO DE DIALOGO -->
@@ -73,5 +91,9 @@
 			</div>
 		</div>
 	</div>
+
+	<script type="text/javascript">
+	seleccionarTipoExponentes("a<sup>n</sup>, exponentes fijos", "a<sup>n</sup>, exponentes variables");
+	</script>
 </body>
 </html>
