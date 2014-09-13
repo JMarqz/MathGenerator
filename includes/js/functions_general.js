@@ -83,8 +83,10 @@ function truncarExponente(numExp){
 // COPIAR
 function copiar(){
 	var texto = document.getElementById("resultado").innerHTML;
+	/*
 	var copiar = texto.
 					replace(/<br>/g, "\n").
+					replace(/<sup><\/sup>/g, "").
 					replace(/<sup>2<\/sup>/g, "²").
 					replace(/<sup>3<\/sup>/g, "³").
 					replace(/<sup>4<\/sup>/g, "⁴").
@@ -95,6 +97,14 @@ function copiar(){
 					replace(/<sup>9<\/sup>/g, "⁹").
 					replace(/<sup>10<\/sup>/g, "¹⁰");
 					// Tengo que reemplazar todo lo que esté entre <sup>n</sup>, desde 1-100
+	*/
+	var map = '⁰¹²³⁴⁵⁶⁷⁸⁹';
+
+	var copiar = texto.replace(/<sup>(\d*)<\/sup>/g, function (_, digits) {
+	    return Array.prototype.map.call(digits, function (digit) {
+	        return map.charAt(+digit);
+	    }).join('');
+	});
 
 	window.plugins.clipboard.copy(
 		copiar,
