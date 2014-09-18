@@ -7,7 +7,7 @@ function onDeviceReady() {
         navigator.splashscreen.hide();
     }, 2000);
     StatusBar.backgroundColorByHexString("#FF8000");
-    StatusBar.styleBlackTranslucent();
+    StatusBar.styleLightContent();
 }
 
 
