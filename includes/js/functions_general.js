@@ -6,6 +6,8 @@ function onDeviceReady() {
     setTimeout(function() {
         navigator.splashscreen.hide();
     }, 2000);
+    StatusBar.backgroundColorByHexString("#FF8000");
+    StatusBar.styleBlackTranslucent();
 }
 
 
@@ -83,21 +85,9 @@ function truncarExponente(numExp){
 // COPIAR
 function copiar(){
 	var texto = document.getElementById("resultado").innerHTML;
-	/*
-	var copiar = texto.
-					replace(/<br>/g, "\n").
-					replace(/<sup><\/sup>/g, "").
-					replace(/<sup>2<\/sup>/g, "²").
-					replace(/<sup>3<\/sup>/g, "³").
-					replace(/<sup>4<\/sup>/g, "⁴").
-					replace(/<sup>5<\/sup>/g, "⁵").
-					replace(/<sup>6<\/sup>/g, "⁶").
-					replace(/<sup>7<\/sup>/g, "⁷").
-					replace(/<sup>8<\/sup>/g, "⁸").
-					replace(/<sup>9<\/sup>/g, "⁹").
-					replace(/<sup>10<\/sup>/g, "¹⁰");
-					// Tengo que reemplazar todo lo que esté entre <sup>n</sup>, desde 1-100
-	*/
+	texto = texto.replace(/<br>/g, "\n");
+	//replace(/<sup><\/sup>/g, "").
+	
 	var map = '⁰¹²³⁴⁵⁶⁷⁸⁹';
 
 	var copiar = texto.replace(/<sup>(\d*)<\/sup>/g, function (_, digits) {
