@@ -6,19 +6,16 @@ function sumas(){
 	var nTerm = document.getElementById("terminos").value;
 	var respuestas = $("#respuestas").is(":checked");
 
-	// Crear Array con números aleatorios
-	var matrizSumas = crearArray(nEjercicios, nTerm, nMax, nMin);
-
 	// Generar Sumas
 	var problemas = "";
 	var resultadoEjercicio = 0;
 	
-	for (var i=0; i<matrizSumas.length; i++) {
-		for(var j=0; j<matrizSumas[i].length; j++){
-			var tmp = matrizSumas[i][j];
+	for (var i=0; i<nEjercicios; i++) {
+		for(var j=0; j<nTerm; j++){
+			var tmp = aleatorio(nMax,nMin);
 			resultadoEjercicio += tmp;
 
-			if (j<matrizSumas[i].length-1) {
+			if (j<nTerm-1) {
 				// Sin respuestas
 				problemas += tmp + " + ";
 			} else{
@@ -147,31 +144,28 @@ function multiplicaciones(){
 	var nTerm = document.getElementById("terminos").value;
 	var respuestas = $("#respuestas").is(":checked");
 
-	// Crear Array con números aleatorios
-	var matrizMultiplicaciones = crearArray(nEjercicios, nTerm, nMax, nMin);
-
 	// Generar Multiplicaciones
 	var problemas = "";
 	var resultadoEjercicio = 1;
 	
-	for (var i=0; i<matrizMultiplicaciones.length; i++) {
-		for(var j=0; j<matrizMultiplicaciones[i].length; j++){
-			var tmp = matrizMultiplicaciones[i][j];
+	for (var i=0; i<nEjercicios; i++) {
+		for(var j=0; j<nTerm; j++){
+			var tmp = aleatorio(nMax,nMin);
 			resultadoEjercicio *= tmp;
 
-			if (j<matrizMultiplicaciones[i].length-1) {
-				// Sin respuestas
-				problemas += tmp + " * ";
+			problemas += tmp;
+
+			if (j<nTerm-1) {
+				problemas += " * ";
 			} else{
 				if (respuestas) {
 					// Con respuestas
-					problemas += tmp + " (R: " + resultadoEjercicio + ")";
-				} else{
-					problemas += tmp;
+					problemas += " (R: " + resultadoEjercicio + ")";
 				}
-				problemas += "<br>";
 			}
 		}
+
+		problemas += "<br>";
 		resultadoEjercicio = 1;
 	};
 	

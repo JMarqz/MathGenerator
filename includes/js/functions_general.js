@@ -11,6 +11,12 @@ function onDeviceReady() {
 }
 
 
+/* CONFIGURACIONES GLOBALES DE JQUERY MOBILE */
+$( document ).on( "mobileinit", function() {
+    $.mobile.defaultPageTransition = 'none';
+});
+
+
 // GENERAR NÚMEROS ALEATORIOS
 function aleatorio(nMax,nMin){
    	numPosibilidades = nMax - nMin;

@@ -125,7 +125,7 @@ function sumasAlgebraicas(){
 				expTmp = expAleatorio;
 			}
 
-			exponentesElegidos[exponentesElegidos.length] = expTmp;
+			exponentesElegidos[exponentesElegidos.length] = parseInt(expTmp);
 		}
 
 		// Crear los términos
@@ -245,7 +245,7 @@ function multiplicacionesAlgebraicas(){
 						expTmp = expAleatorio;
 					}
 
-					problemas += "<sup>" + truncarExponente(expTmp) + "</sup>";
+					problemas += "<sup>" + truncarExponente(parseInt(expTmp)) + "</sup>";
 					sumaExponentes[k] += parseInt(expTmp);
 				}
 
