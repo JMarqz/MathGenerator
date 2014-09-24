@@ -1,3 +1,9 @@
+/* PREVENIR QUE SE ABRA EL CUADRO DE DIÁOLO DE COPIAR/ABRIR */
+a {
+	-webkit-touch-callout: none;	/* disable callout, image save panel */
+    -webkit-user-select: none;		/* Disable selection/copy in UIWebView */
+}
+
 /* EJEMPLO */
 .ejemplo{
 	color: rgb(180, 180, 180)!important;
@@ -21,6 +27,7 @@
 
 #resultado{
 	max-height: 150px!important;
+	max-width: 250px!important;
 	overflow: auto!important;
 }
 
@@ -39,7 +46,7 @@ label.ui-btn{
 }
 
 legend, label{
-	font-weight: bold!important;
+	font-weight: normal!important;
 }
 
 /* ICONOS */
