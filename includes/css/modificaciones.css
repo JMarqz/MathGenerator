@@ -35,9 +35,13 @@ a {
 	text-align: center!important;
 }
 
-/* TEXTO EN LIST */
+/* LISTVIEWS */
 .ui-listview a{
 	font-weight: normal!important;
+}
+
+.ui-btn:hover{
+	background-color: transparent!important;
 }
 
 /* LABEL Y BOTONES */
