@@ -29,14 +29,14 @@ function aleatorio(nMax,nMin){
 
 // ALTERNAR ENTRE EXPONENTES FIJOS Y VARIABLES
 function seleccionarTipoExponentes(expr1, expr2){
-	$(":radio:eq(0)").click(function(){
+	$("#exp-fijos-radio").click(function(){
 		$("#exp-fijos").show();
 		$("#exp-var").hide();
 
 		$("#ejemplo").html("De la forma: " + expr1);
 	});
 
-	$(":radio:eq(1)").click(function(){
+	$("#exp-variables-radio").click(function(){
 		$("#exp-var").show();
 		$("#exp-fijos").hide();
 

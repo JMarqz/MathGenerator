@@ -19,13 +19,6 @@ a {
     background: #FF8000!important;
 }
 
-/* BOTÓN PERSONALIZADO */
-.btn-personalizado{
-	color: #FF8000!important;
-	border-color: #FF8000!important;
-	font-weight: normal!important;
-}
-
 /* QUITAR SOMBRAS */
 .ui-shadow{
 	box-shadow: none!important;

@@ -117,10 +117,10 @@ function sumasAlgebraicas(){
 			var expTmp = "";
 
 			if (valTipoExp == 0){
-				expTmp = document.getElementById("exponente").value;
+				expTmp = document.getElementById("exponente-fijo").value;
 			}else{
-				var expMax = document.getElementById("rango-exp-max").value;
-				var expMin = document.getElementById("rango-exp-min").value;
+				var expMax = document.getElementById("exp-max").value;
+				var expMin = document.getElementById("exp-min").value;
 				var expAleatorio = aleatorio(expMin, expMax);
 				expTmp = expAleatorio;
 			}
@@ -237,10 +237,10 @@ function multiplicacionesAlgebraicas(){
 
 					var expTmp = 0;
 					if (valTipoExp == 0) {
-						expTmp = document.getElementById("exponente").value;
+						expTmp = document.getElementById("exponente-fijo").value;
 					} else{
-						var expMax = document.getElementById("rango-exp-max").value;
-						var expMin = document.getElementById("rango-exp-min").value;
+						var expMax = document.getElementById("exp-max").value;
+						var expMin = document.getElementById("exp-min").value;
 						var expAleatorio = aleatorio(expMin, expMax);
 						expTmp = expAleatorio;
 					}
