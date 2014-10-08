@@ -28,20 +28,18 @@ function aleatorio(nMax,nMin){
 
 
 // ALTERNAR ENTRE EXPONENTES FIJOS Y VARIABLES
-function seleccionarTipoExponentes(expr1, expr2){
-	$("#exp-fijos-radio").click(function(){
-		$("#exp-fijos").show();
-		$("#exp-var").hide();
+function expFijos(expr){
+	$("#exp-fijos").show();
+	$("#exp-var").hide();
 
-		$("#ejemplo").html("De la forma: " + expr1);
-	});
+	$("#ejemplo").html("De la forma: " + expr);
+}
 
-	$("#exp-variables-radio").click(function(){
-		$("#exp-var").show();
-		$("#exp-fijos").hide();
+function expVariables(expr){
+	$("#exp-var").show();
+	$("#exp-fijos").hide();
 
-		$("#ejemplo").html("De la forma: " + expr2);
-	});
+	$("#ejemplo").html("De la forma: " + expr);
 }
 
 
@@ -92,7 +90,6 @@ function truncarExponente(numExp){
 function copiar(){
 	var texto = document.getElementById("resultado").innerHTML;
 	texto = texto.replace(/<br>/g, "\n");
-	//replace(/<sup><\/sup>/g, "").
 	
 	var map = '⁰¹²³⁴⁵⁶⁷⁸⁹';
 

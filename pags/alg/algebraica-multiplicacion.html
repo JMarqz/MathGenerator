@@ -39,10 +39,10 @@
 			    <fieldset data-role="controlgroup" data-mini="true">
 			        <legend>Tipo de exponentes:</legend>
 			        <label for="exp-fijos-radio">Exponentes fijo</label>
-			        <input type="radio" name="exponentes" id="exp-fijos-radio" value="0" checked="checked">
+			        <input type="radio" onClick="expFijos('a m<sup>x</sup>n<sup>x</sup> * ... * b m<sup>x</sup>n<sup>x</sup>')" name="exponentes" id="exp-fijos-radio" value="0" checked="checked">
 			        
 			        <label for="exp-variables-radio">Exponentes variables</label>
-			        <input type="radio" name="exponentes" id="exp-variables-radio" value="1">
+			        <input type="radio" onClick="expVariables('a m<sup>x</sup>n<sup>y</sup> * ... * b m<sup>x</sup>n<sup>y</sup>')" name="exponentes" id="exp-variables-radio" value="1">
 			    </fieldset>
 			    
 			    <!-- Exponentes -->
@@ -99,9 +99,5 @@
 			</div>
 		</div>
 	</div>
-
-	<script type="text/javascript">
-		seleccionarTipoExponentes("a m<sup>x</sup>n<sup>x</sup> * ... * b m<sup>x</sup>n<sup>x</sup>", "a m<sup>x</sup>n<sup>y</sup> * ... * b m<sup>x</sup>n<sup>y</sup>");
-	</script>
 </body>
 </html>
