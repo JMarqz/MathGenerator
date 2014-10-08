@@ -40,7 +40,7 @@
     <preference name="phonegap-version"         value="3.5.0" />
     <preference name="orientation"              value="portrait" />
     <preference name="prerendered-icon"         value="true" />
-    <preference name="DisallowOverscroll"       value="true"/>
+    <preference name="DisallowOverscroll"       value="true" />
     <preference name="AutoHideSplashScreen"     value="false" />
     <preference name="detect-data-types"        value="false" />
     
@@ -61,6 +61,8 @@
     <gap:splash src="splash/ios/screen-iphone-portrait-568h-2x.png" gap:platform="ios"     width="640" height="1136" />
     <gap:splash src="splash/ios/screen-ipad-portrait.png"           gap:platform="ios"     width="768" height="1024" />
     <gap:splash src="splash/ios/screen-ipad-portrait-2x.png"        gap:platform="ios"     width="1536" height="2008" />
-
+    <!-- Launch Images -->
+    <gap:splash src="screen/ios/launch-iphone6.png"                 gap:platform="ios"     width="750" height="1334"/>
+    <gap:splash src="screen/ios/launch-iphone6+.png"                gap:platform="ios"     width="1242" height="2208"/>
 
 </widget>
