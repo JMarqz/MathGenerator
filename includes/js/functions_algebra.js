@@ -172,6 +172,7 @@ function sumasAlgebraicas(){
 	}
 
 	document.getElementById("resultado").innerHTML = problemas;
+	cambiarColorBarraEstado();
 }
 
 
@@ -274,4 +275,5 @@ function multiplicacionesAlgebraicas(){
 	}
 
 	document.getElementById("resultado").innerHTML = problemas;
+	cambiarColorBarraEstado();
 }

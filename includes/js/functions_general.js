@@ -43,6 +43,17 @@ function expVariables(expr){
 }
 
 
+// CAMBIAR COLOR DE LA BARRA DE ESTADO
+function cambiarColorBarraEstado(){
+	StatusBar.backgroundColorByHexString("#FCBC7C");
+}
+
+function cerrandoResultados(){
+	StatusBar.backgroundColorByHexString("#FF8000");
+	$( "#popupDialog" ).popup( "close" );
+}
+
+
 // CONVERTIR NÚMEROS AL INICIO DEL PROBLEMA
 function truncarNumero(num){
 	var tmp = "";

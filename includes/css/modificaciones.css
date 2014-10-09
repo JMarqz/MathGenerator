@@ -31,22 +31,8 @@ a {
 	border-bottom-right-radius: 0;
 }
 
-.ui-popup-screen {
-	background-color: black!important;
-}
-
-.ui-body-b {
+.ui-body-b, .cerrar-dialogo {
 	border-width: 0px!important;
-}
-
-.cerrar-dialogo {
-	/*background-color: #FFCC99!important;*/
-	border-color: transparent!important;
-}
-
-.cerrar-dialogo2 {
-	background-color: #FFCC99!important;
-	border-color: transparent!important;
 }
 
 #resultado {
