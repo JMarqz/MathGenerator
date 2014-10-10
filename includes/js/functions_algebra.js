@@ -25,6 +25,7 @@ function factoriales(){
 	}
 
 	document.getElementById("resultado").innerHTML = problemas;
+	cambiarColorBarraEstado();
 }
 
 
@@ -64,13 +65,12 @@ function exponenciales(){
 	}
 	
 	document.getElementById("resultado").innerHTML = problemas;
+	cambiarColorBarraEstado();
 }
 
 
 // SUMAS ALGEBRAICAS
 function sumasAlgebraicas(){
-	cambiarColorBarraEstado();
-
 	// Variables generales
 	var nEjercicios = document.getElementById("nEjercicios").value;
 	var nMax = document.getElementById("rango-max").value;
@@ -174,13 +174,12 @@ function sumasAlgebraicas(){
 	}
 
 	document.getElementById("resultado").innerHTML = problemas;
+	cambiarColorBarraEstado();
 }
 
 
 // EXPRESIONES ALGEBRAICAS EXPONENTE FIJO
 function multiplicacionesAlgebraicas(){
-	cambiarColorBarraEstado();
-
 	// Variables generales
 	var nEjercicios = document.getElementById("nEjercicios").value;
 	var nMax = document.getElementById("rango-max").value;
@@ -278,4 +277,5 @@ function multiplicacionesAlgebraicas(){
 	}
 
 	document.getElementById("resultado").innerHTML = problemas;
+	cambiarColorBarraEstado();
 }

@@ -32,6 +32,7 @@ function sumas(){
 	};
 	
 	document.getElementById("resultado").innerHTML = problemas;
+	cambiarColorBarraEstado();
 }
 
 
@@ -133,6 +134,7 @@ function restas(){
 	};
 	
 	document.getElementById("resultado").innerHTML = problemas;
+	cambiarColorBarraEstado();
 }
 
 
@@ -170,6 +172,7 @@ function multiplicaciones(){
 	};
 	
 	document.getElementById("resultado").innerHTML = problemas;
+	cambiarColorBarraEstado();
 }
 
 
@@ -247,4 +250,5 @@ function divisiones(){
 	};
 	
 	document.getElementById("resultado").innerHTML = problemas;
+	cambiarColorBarraEstado();
 }
