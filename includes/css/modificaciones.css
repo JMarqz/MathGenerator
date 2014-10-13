@@ -12,12 +12,20 @@ a {
 }
 
 /* RANGESLIDER */
+.ui-bar-b {
+	border-color: transparent!important;
+}
+
 .ui-slider .ui-btn-active {
     background: #FF8000!important;
 }
 
 .ui-rangeslider .ui-btn-active {
     background: #FF8000!important;
+}
+
+.ui-slider-track.ui-corner-all {
+	border-radius: 1em!important;
 }
 
 /* QUITAR SOMBRAS */
@@ -69,10 +77,16 @@ legend, label {
 }
 
 /* BOTON PARA GENERAR */
-.btn-generar:active, .btn-generar:hover {
-	background-color: #e8e8e8!important;
+.ui-btn-b {
+	background-color: #f6f6f6!important;
 	border-color: #dddddd!important;
 	color: #333333!important;
+	text-shadow: none!important;
+}
+
+.ui-btn-active {
+	background-color: #e8e8e8!important;
+	text-shadow: none!important;
 }
 
 /* ICONOS */
