@@ -54,7 +54,7 @@ function cerrandoResultados(){
 }
 
 
-// CONVERTIR NÚMEROS AL INICIO DEL PROBLEMA
+// TRUNCAR NÚMEROS AL INICIO DEL PROBLEMA
 function truncarNumero(num){
 	var tmp = "";
 
@@ -67,8 +67,7 @@ function truncarNumero(num){
 	return tmp;
 }
 
-
-// CONVERTIR NÚMEROS EN EL CUERPO DEL PROBLEMA
+// TRUNCAR NÚMEROS EN EL CUERPO DEL PROBLEMA
 function truncarNumeroCuerpo(num){
 	var tmp = "";
 
@@ -85,6 +84,7 @@ function truncarNumeroCuerpo(num){
 	return tmp;
 }
 
+// TRUNCAR EXPONENTES
 function truncarExponente(numExp){
 	var tmp = "";
 
@@ -94,6 +94,69 @@ function truncarExponente(numExp){
 	}
 
 	return tmp;
+}
+
+
+// LITERALES ELEGIDAS
+function literalesElegidasAleatorias(numeroLiterales){
+	var literales = ['a', 'b', 'p', 'r', 'u', 'v', 'x', 'y'];
+	var literalesPar = [
+		['a', 'b'],		
+		['p', 'r'],
+		['u', 'v'],
+		['x', 'y']
+	];
+
+	// Elegir las literales para todo el ejercicio
+	var literalesElegidas = [];
+	var seleccionAleatoria = aleatorio(0, literales.length-1);
+	var seleccionAleatoriaPar = aleatorio(0, literalesPar.length-1);
+
+	for(var l=0; l<numeroLiterales; l++){
+		var literalTmp = "";
+
+		switch(numeroLiterales){
+			case 1: literalTmp = literales[seleccionAleatoria]; break;
+			default: literalTmp = literalesPar[seleccionAleatoriaPar][l];
+		}
+		
+		literalesElegidas[literalesElegidas.length] = literalTmp;
+	}
+
+	return literalesElegidas;
+}
+
+
+// LIMITAR DECIMALES
+function limitarDecimales(numeroAtruncar){
+	var resultadoStr = numeroAtruncar.toString();
+	var arrResultado = resultadoStr.split(".");
+	var decimales = arrResultado[1];
+
+	if (decimales.length > 4) {
+		return numeroAtruncar.toFixed(4);
+	} else{
+		return numeroAtruncar;
+	}
+}
+
+
+// SELECCIONAR EXPONENTES
+function seleccionarExponentes(tipoExponente){
+	var exp = 0;
+
+	switch (tipoExponente){
+		case 0:
+			exp = document.getElementById("exponente-fijo").value;
+			break;
+		case 1:
+			var nExpMin = document.getElementById("exp-min").value;
+			var nExpMax = document.getElementById("exp-max").value;
+			exp = aleatorio(nExpMax,nExpMin);
+		break;
+	}
+
+	return exp;
 }
 
 

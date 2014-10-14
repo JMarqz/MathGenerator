@@ -8,27 +8,26 @@ function sumas(){
 
 	// Generar Sumas
 	var problemas = "";
-	var resultadoEjercicio = 0;
 	
 	for (var i=0; i<nEjercicios; i++) {
+		var resultadoEjercicio = 0;
+
 		for(var j=0; j<nTerm; j++){
 			var tmp = aleatorio(nMax,nMin);
 			resultadoEjercicio += tmp;
 
+			problemas += tmp;
+
 			if (j<nTerm-1) {
-				// Sin respuestas
-				problemas += tmp + " + ";
+				problemas += " + ";
 			} else{
 				if (respuestas) {
-					// Con respuestas
-					problemas += tmp + " (R: " + resultadoEjercicio + ")";
-				} else{
-					problemas += tmp;
+					problemas += " (R: " + resultadoEjercicio + ")";
 				}
+
 				problemas += "<br>";
 			}
 		}
-		resultadoEjercicio = 0;
 	};
 	
 	document.getElementById("resultado").innerHTML = problemas;
@@ -117,16 +116,15 @@ function restas(){
 				resultadoEjercicio -= tmp;
 			}
 
+			problemas += tmp;
+
 			if (j<matrizRestas[i].length-1) {
-				// Sin respuestas
-				problemas += tmp + " - ";
+				problemas += " - ";
 			} else{
 				if (respuestas) {
-					// Con respuestas
-					problemas += tmp + " (R: " + resultadoEjercicio + ")";
-				} else{
-					problemas += tmp;
+					problemas += " (R: " + resultadoEjercicio + ")";
 				}
+				
 				problemas += "<br>";
 			}
 		}
@@ -161,7 +159,6 @@ function multiplicaciones(){
 				problemas += " * ";
 			} else{
 				if (respuestas) {
-					// Con respuestas
 					problemas += " (R: " + resultadoEjercicio + ")";
 				}
 			}
@@ -206,7 +203,7 @@ function divisiones(){
 					}					
 				}
 			} else{
-			//Resultados con punto decimal
+				//Resultados con punto decimal
 				var randomNum1 = aleatorio(nMax,nMin);
 				matrizDivisiones[i].push(randomNum1);
 			}
@@ -226,23 +223,23 @@ function divisiones(){
 			} else{
 				resultadoEjercicio /= tmp;
 				
+				// Limitar a sólo 4 decimales
 				if(!resultadosEnteros){
 					if (resultadoEjercicio % 1 != 0) {
-						resultadoEjercicio = resultadoEjercicio.toFixed(4);
+						resultadoEjercicio = limitarDecimales(resultadoEjercicio);
 					}					
 				}
 			}
 
+			problemas += tmp;
+
 			if (j<matrizDivisiones[i].length-1) {
-				// Sin respuestas
-				problemas += tmp + " / ";
+				problemas += " / ";
 			} else{
 				if (respuestas) {
-					// Con respuestas
-					problemas += tmp + " (R: " + resultadoEjercicio + ")";
-				} else{
-					problemas += tmp;
+					problemas += " (R: " + resultadoEjercicio + ")";
 				}
+
 				problemas += "<br>";
 			}
 		}

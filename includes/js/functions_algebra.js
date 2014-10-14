@@ -12,14 +12,15 @@ function factoriales(){
 	for(var i=0; i<nEjercicios; i++){
 		var tmp = aleatorio(nMax,nMin); // Número al azar
 
+		problemas += tmp + "!";
+
 		if (respuestas) { // Mostrando respuestas
 			for(var j=tmp; j>=1; j--){
 				resultadoEjercicio *= j; // Generando respuesta
 			}
-			problemas += tmp + "!" + " R: [" + resultadoEjercicio + "]"; // Mostrando las respuestas
-		} else{
-			problemas += tmp + "!";
+			problemas += " R: [" + resultadoEjercicio + "]"; // Mostrando las respuestas
 		}
+
 		problemas += "<br>";
 		resultadoEjercicio = 1;
 	}
@@ -29,7 +30,7 @@ function factoriales(){
 }
 
 
-// EXPONENCIALES EXPONENTE FIJO
+// EXPONENCIALES
 function exponenciales(){
 	var nEjercicios = document.getElementById("ejercicios").value;
 	var nMin = document.getElementById("base-min").value;
@@ -46,21 +47,16 @@ function exponenciales(){
 		var tmp = aleatorio(nMax,nMin);
 		
 		// Tipo de exponentes
-		if (tipoExp == 0) {
-			exp = document.getElementById("exponente-fijo").value;
-		} else{
-			var nExpMin = document.getElementById("exp-min").value;
-			var nExpMax = document.getElementById("exp-max").value;
-			exp = aleatorio(nExpMax,nExpMin);
-		}
+		exp = seleccionarExponentes(parseInt(tipoExp));
 
 		resultadoEjercicio = Math.pow(tmp,exp);
 
+		problemas += tmp + "<sup>" + exp + "</sup>";
+
 		if (respuestas) {
-			problemas += tmp + "<sup>" + exp + "</sup>" + " R: [" + resultadoEjercicio + "]";
-		} else{
-			problemas += tmp + "<sup>" + exp + "</sup>";
+			problemas += " R: [" + resultadoEjercicio + "]";
 		}
+
 		problemas += "<br>";
 	}
 	
@@ -80,14 +76,6 @@ function sumasAlgebraicas(){
 	var respuestas = $("#respuestas").is(":checked");
 	var nLiterales = document.getElementById("nLiterales").value;
 
-	var literales = ['a', 'b', 'p', 'r', 'u', 'v', 'x', 'y'];
-	var literalesPar = [
-		['a', 'b'],		
-		['p', 'r'],
-		['u', 'v'],
-		['x', 'y']
-	];
-
 	var problemas = "";
 	var suma = 0;
 
@@ -96,37 +84,13 @@ function sumasAlgebraicas(){
 	for(var i=0; i<nEjercicios; i++){
 		
 		// Elegir las literales para todo el ejercicio
-		var literalesElegida = [];
-		var seleccionAleatoria = aleatorio(0, literales.length-1);
-		var seleccionAleatoriaPar = aleatorio(0, literalesPar.length-1);
-
-		for(var l=0; l<nLiterales; l++){
-			var literalTmp = "";
-
-			switch(nLiterales){
-				case 1: literalTmp = literales[seleccionAleatoria]; break;
-				default: literalTmp = literalesPar[seleccionAleatoriaPar][l];
-			}
-			
-			literalesElegida[literalesElegida.length] = literalTmp;
-		}
-		
+		var literalesElegidas = literalesElegidasAleatorias(nLiterales);
 
 		// Crear exponentes para todo el ejercicio
 		var exponentesElegidos = [];
 
 		for(var e=0; e<nLiterales; e++){
-			var expTmp = "";
-
-			if (valTipoExp == 0){
-				expTmp = document.getElementById("exponente-fijo").value;
-			}else{
-				var expMax = document.getElementById("exp-max").value;
-				var expMin = document.getElementById("exp-min").value;
-				var expAleatorio = aleatorio(expMin, expMax);
-				expTmp = expAleatorio;
-			}
-
+			var expTmp = seleccionarExponentes(parseInt(valTipoExp));
 			exponentesElegidos[exponentesElegidos.length] = parseInt(expTmp);
 		}
 
@@ -150,7 +114,7 @@ function sumasAlgebraicas(){
 
 				// Agregar Literales y exponentes
 				for(var k=0; k<nLiterales; k++){
-					problemas += literalesElegida[k] + "<sup>" + truncarExponente(exponentesElegidos[k]) + "</sup>";
+					problemas += literalesElegidas[k] + "<sup>" + truncarExponente(exponentesElegidos[k]) + "</sup>";
 				}
 			}
 		}
@@ -162,7 +126,7 @@ function sumasAlgebraicas(){
 			// Agregar Literales y exponentes a las respuestas
 			if (suma != 0) {
 				for(var k=0; k<nLiterales; k++){
-					problemas += literalesElegida[k] + "<sup>" + truncarExponente(exponentesElegidos[k]) + "</sup>";
+					problemas += literalesElegidas[k] + "<sup>" + truncarExponente(exponentesElegidos[k]) + "</sup>";
 				}
 			}
 
@@ -178,7 +142,7 @@ function sumasAlgebraicas(){
 }
 
 
-// EXPRESIONES ALGEBRAICAS EXPONENTE FIJO
+// MULTIPLICACIONES ALGEBRAICAS
 function multiplicacionesAlgebraicas(){
 	// Variables generales
 	var nEjercicios = document.getElementById("nEjercicios").value;
@@ -188,14 +152,6 @@ function multiplicacionesAlgebraicas(){
 	var valTipoExp = $('input[name=exponentes]:checked').val();
 	var respuestas = $("#respuestas").is(":checked");
 	var nLiterales = document.getElementById("nLiterales").value;
-
-	var literales = ['a', 'b', 'p', 'r', 'u', 'v', 'x', 'y'];
-	var literalesPar = [
-		['a', 'b'],		
-		['p', 'r'],
-		['u', 'v'],
-		['x', 'y']
-	];
 
 	var problemas = "";
 	var numTruncado = "";
@@ -207,20 +163,7 @@ function multiplicacionesAlgebraicas(){
 		var sumaExponentes = [0,0];
 
 		// Elegir las literales para todo el ejercicio
-		var literalesElegida = [];
-		var seleccionAleatoria = aleatorio(0, literales.length-1);
-		var seleccionAleatoriaPar = aleatorio(0, literalesPar.length-1);
-
-		for(var l=0; l<nLiterales; l++){
-			var literalTmp = "";
-
-			switch(nLiterales){
-				case 1: literalTmp = literales[seleccionAleatoria]; break;
-				default: literalTmp = literalesPar[seleccionAleatoriaPar][l];
-			}
-			
-			literalesElegida[literalesElegida.length] = literalTmp;
-		}
+		var literalesElegidas = literalesElegidasAleatorias(nLiterales);
 
 		// Crear los términos
 		for(var j=0; j<nTerminos; j++){
@@ -236,17 +179,9 @@ function multiplicacionesAlgebraicas(){
 
 				// Agregar Literales y exponentes
 				for(var k=0; k<nLiterales; k++){
-					problemas += literalesElegida[k];
+					problemas += literalesElegidas[k];
 
-					var expTmp = 0;
-					if (valTipoExp == 0) {
-						expTmp = document.getElementById("exponente-fijo").value;
-					} else{
-						var expMax = document.getElementById("exp-max").value;
-						var expMin = document.getElementById("exp-min").value;
-						var expAleatorio = aleatorio(expMin, expMax);
-						expTmp = expAleatorio;
-					}
+					var expTmp = seleccionarExponentes(parseInt(valTipoExp));
 
 					problemas += "<sup>" + truncarExponente(parseInt(expTmp)) + "</sup>";
 					sumaExponentes[k] += parseInt(expTmp);
@@ -265,7 +200,7 @@ function multiplicacionesAlgebraicas(){
 			// Agregar Literales y exponentes a las respuestas
 			if (resultado != 0) {
 				for(var k=0; k<nLiterales; k++){
-					problemas += literalesElegida[k] + "<sup>" + sumaExponentes[k] + "</sup>"
+					problemas += literalesElegidas[k] + "<sup>" + sumaExponentes[k] + "</sup>"
 				}
 			}
 
@@ -279,3 +214,103 @@ function multiplicacionesAlgebraicas(){
 	document.getElementById("resultado").innerHTML = problemas;
 	cambiarColorBarraEstado();
 }
+
+
+// DIVISIONES ALGEBRAICAS
+function divisionesAlgebraicas(){
+	// Variables generales
+	var nEjercicios = document.getElementById("nEjercicios").value;
+	var nMax = document.getElementById("rango-max").value;
+	var nMin = document.getElementById("rango-min").value;
+	var valTipoExp = $('input[name=exponentes]:checked').val();
+	var respuestas = $("#respuestas").is(":checked");
+	var ceros = $("#ceros").is(":checked");
+	var nLiterales = document.getElementById("nLiterales").value;
+
+	var problemas = "";
+	var numTruncado = "";
+	var resultado = 1;
+	
+
+	// Generar los ejercicios
+	for(var i=0; i<nEjercicios; i++){
+		var arregloDivision = [];
+		var sumaExponentes = ['',''];
+
+		// Elegir las literales para todo el ejercicio
+		var literalesElegidas = literalesElegidasAleatorias(nLiterales);
+
+		// Crear la división, solo 2 términos
+		for(var j=0; j<2; j++){
+			var nAleatorio = aleatorio(nMin, nMax);
+
+			if (nAleatorio == 0) {
+				j--; // Eliminar los 0's
+			} else{
+				numTruncado = truncarNumero(nAleatorio);
+
+				problemas += numTruncado;
+				arregloDivision[arregloDivision.length] = nAleatorio;
+
+				// Agregar Literales y exponentes
+				for(var k=0; k<nLiterales; k++){
+					problemas += literalesElegidas[k];
+
+					var expTmp = seleccionarExponentes(parseInt(valTipoExp));
+
+					problemas += "<sup>" + truncarExponente(parseInt(expTmp)) + "</sup>";
+
+					if (sumaExponentes[k] == '') {
+						sumaExponentes[k] = expTmp;
+					} else{
+						sumaExponentes[k] = sumaExponentes[k] - expTmp;
+					}
+				}
+
+				if(j<1){
+					problemas += " / ";
+				}
+			}
+
+			numerador = arregloDivision[0];
+			denominador = arregloDivision[1];
+			resultado = numerador / denominador;
+		}
+
+		// Resultados 
+		if (respuestas) {
+			// Limitar a sólo 4 decimales
+			if (resultado % 1 != 0) {
+				resultado = limitarDecimales(resultado);
+			};
+
+			problemas += " R: [";
+			
+			if (sumaExponentes[0] != 0 || sumaExponentes[1] != 0) {
+				problemas += truncarNumero(resultado);
+			} else{
+				problemas += resultado;
+			}
+
+			// Agregar Literales y exponentes a las respuestas
+			if (resultado != 0) {
+				for(var k=0; k<nLiterales; k++){
+					if (sumaExponentes[k] != 0) {
+						problemas += literalesElegidas[k] + "<sup>" + truncarExponente(sumaExponentes[k]) + "</sup>";
+					};
+				}
+			}
+
+			problemas += "]";
+		};
+
+		problemas += "<br>";
+	}
+
+	document.getElementById("resultado").innerHTML = problemas;
+	cambiarColorBarraEstado();
+}
+
+
+
+

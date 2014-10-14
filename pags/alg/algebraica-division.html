@@ -23,11 +23,11 @@
 	<div data-role="page" id="page" data-theme="a">		
 		<header data-role="header">
 			<a href="../algebra.html" data-icon="carat-l" data-iconpos="notext" class="ui-icon ui-nodisc-icon">Atrás</a>
-			<h1>Multiplicaciones algebraicas</h1>
+			<h1>Divisiones algebraicas</h1>
 		</header>
 
 		<div data-role="content">
-			<p id="ejemplo" class="ejemplo">De la forma: a x<sup>m</sup>y<sup>m</sup> * ... * b x<sup>m</sup>y<sup>m</sup></p>
+			<p id="ejemplo" class="ejemplo">De la forma: a x<sup>m</sup>y<sup>n</sup> / b x<sup>m</sup>y<sup>n</sup></p>
 
 			<!-- FORMULARIO -->
 			<form id="form">
@@ -40,10 +40,10 @@
 			    <fieldset data-role="controlgroup" data-mini="true">
 			        <legend>Tipo de exponentes:</legend>
 			        <label for="exp-fijos-radio">Exponentes fijo</label>
-			        <input type="radio" onClick="expFijos('a x<sup>m</sup>y<sup>m</sup> * ... * b x<sup>m</sup>y<sup>m</sup>')" name="exponentes" id="exp-fijos-radio" value="0" checked="checked">
+			        <input type="radio" onClick="expFijos('a x<sup>m</sup>y<sup>m</sup> / b x<sup>m</sup>y<sup>m</sup>')" name="exponentes" id="exp-fijos-radio" value="0">
 			        
 			        <label for="exp-variables-radio">Exponentes variables</label>
-			        <input type="radio" onClick="expVariables('a x<sup>m</sup>y<sup>n</sup> * ... * b x<sup>p</sup>y<sup>r</sup>')" name="exponentes" id="exp-variables-radio" value="1">
+			        <input type="radio" onClick="expVariables('a x<sup>m</sup>y<sup>n</sup> / b x<sup>m</sup>y<sup>n</sup>')" name="exponentes" id="exp-variables-radio" value="1" checked="checked">
 			    </fieldset>
 			    
 			    <!-- Exponentes -->
@@ -63,20 +63,18 @@
 
 			    <label for="nLiterales">Número de literales (1-2)</label>
 			    <input type="range" name="nLiterales" id="nLiterales" data-mini="true" data-track-theme="b" data-highlight="true" min="1" max="2" value="2">
-			    
-			    <label for="nTerminos">Número de términos a multiplicar (2-10)</label>
-			    <input type="range" name="nTerminos" id="nTerminos" data-mini="true" data-track-theme="b" data-highlight="true" min="2" max="10" value="4">
 
 			    <label for="nEjercicios">Número de ejercicios a generar (1-100)</label>
 			    <input type="range" name="nEjercicios" id="nEjercicios" data-mini="true" data-track-theme="b" data-highlight="true" min="1" max="100" value="10">
 
 			    <label for="respuestas">Incluir respuestas</label>
 			    <input type="checkbox" name="respuestas" id="respuestas" data-mini="true">
+
 			</form>
 
 			<!-- BTN GENERAR -->
 			<div class="centrar">
-				<a href="#popupDialog" data-rel="popup" data-position-to="window" data-transition="pop" class="ui-btn ui-btn-b ui-corner-all ui-shadow ui-btn-inline" onClick="multiplicacionesAlgebraicas()">Generar</a>
+				<a href="#popupDialog" data-rel="popup" data-position-to="window" data-transition="pop" class="ui-btn ui-btn-b ui-corner-all ui-shadow ui-btn-inline" onClick="divisionesAlgebraicas()">Generar</a>
 			</div>
 
 
