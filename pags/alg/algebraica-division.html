@@ -47,16 +47,16 @@
 			    </fieldset>
 			    
 			    <!-- Exponentes -->
-			    <div id="exp-fijos">
+			    <div id="exp-fijos" style="display: none;">
 			    	<label for="exponente-fijo">Número a utilizar en el exponente (1-10)</label>
 			    	<input type="range" name="exponente-fijo" id="exponente-fijo" data-mini="true" data-track-theme="b" data-highlight="true" min="1" max="10" value="2">
 			    </div>
 
-			    <div id="exp-var" style="display: none;">
+			    <div id="exp-var">
 				    <div data-role="rangeslider" data-mini="true" data-track-theme="b">
 				        <label for="exponentes-variables">Rango de números a utilizar en el exponente (1 a 10)</label>
-				        <input type="range" name="exponentes-variables" id="exp-min" min="1" max="10" value="1" >
-				        <input type="range" name="exponentes-variables" id="exp-max" min="1" max="10" value="3">
+				        <input type="range" name="exponentes-variables" id="exp-min" min="-10" max="10" value="-10" >
+				        <input type="range" name="exponentes-variables" id="exp-max" min="-10" max="10" value="3">
 				    </div>
 			    </div>
 			    <!-- Terminan Exponentes -->

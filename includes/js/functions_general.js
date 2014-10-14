@@ -165,15 +165,47 @@ function copiar(){
 	var texto = document.getElementById("resultado").innerHTML;
 	texto = texto.replace(/<br>/g, "\n");
 	
-	//var map = '⁰¹²³⁴⁵⁶⁷⁸⁹';
-	var map = 'ˉ¹ˉ²ˉ³ˉ⁴ˉ⁵ˉ⁶ˉ⁷ˉ⁸ˉ⁹⁰¹²³⁴⁵⁶⁷⁸⁹';
-
+	var map = '⁰¹²³⁴⁵⁶⁷⁸⁹';
+	//var mapNegativos = ['⁰','ˉ¹','­ˉ²','­ˉ³','­ˉ⁴','­ˉ⁵','­ˉ⁶','­ˉ⁷','ˉ⁸','­ˉ⁹'];
+	/*
 	var copiar = texto.replace(/<sup>(\d*)<\/sup>/g, function (_, digits) {
 	    return Array.prototype.map.call(digits, function (digit) {
+	    	//console.log("digito:" + (+digit));
+	    	console.log("# exp: " + map.charAt(+digit));
 	        return map.charAt(+digit);
 	    }).join('');
 	});
+	*/
+	
+	var copiar = texto.replace(/<sup>(\-*(\d*))<\/sup>/g, function (str, digits){
+		//var exp = "";
+		//var cont = 0;
+		return Array.prototype.map.call(digits, function (digit) {
+			/*
+			console.log("str :" + str);
+			console.log("digits: " + digits);
+			console.log("digits-length: " + digits.length);
+			console.log("digit: " + digit);
+			*/
+			var exp = "";
+			
+			if (digit != '-') {
+				exp += map.charAt(digit);
+				//cont++;
+			} else {
+				exp += "ˉ";
+				//cont++;
+			}
 
+			/*if (cont == digits.length) {
+				console.log("# exp: " + exp);
+				return exp;
+			};*/
+			return exp;
+	    }).join('');
+	});
+
+	
 	window.plugins.clipboard.copy(
 		copiar,
 		function(){ // Success
@@ -182,6 +214,7 @@ function copiar(){
 		function(){ // Error
 			navigator.notification.alert("Ocurrió un error al copiar en el portapapeles", null, "Error", "Ok");
 		});
+	
 }
 
 
