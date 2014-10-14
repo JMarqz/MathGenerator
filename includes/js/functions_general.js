@@ -165,7 +165,8 @@ function copiar(){
 	var texto = document.getElementById("resultado").innerHTML;
 	texto = texto.replace(/<br>/g, "\n");
 	
-	var map = '⁰¹²³⁴⁵⁶⁷⁸⁹';
+	//var map = '⁰¹²³⁴⁵⁶⁷⁸⁹';
+	var map = 'ˉ¹ˉ²ˉ³ˉ⁴ˉ⁵ˉ⁶ˉ⁷ˉ⁸ˉ⁹⁰¹²³⁴⁵⁶⁷⁸⁹';
 
 	var copiar = texto.replace(/<sup>(\d*)<\/sup>/g, function (_, digits) {
 	    return Array.prototype.map.call(digits, function (digit) {
