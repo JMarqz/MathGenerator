@@ -19,10 +19,11 @@ function sumas(){
 			problemas += tmp;
 
 			if (j<nTerm-1) {
-				problemas += " + ";
+				problemas += "+";
 			} else{
 				if (respuestas) {
-					problemas += " (R: " + resultadoEjercicio + ")";
+					var resultadoTmp = numeral(resultadoEjercicio).format('0,0');
+					problemas += " (R: " + resultadoTmp + ")";
 				}
 
 				problemas += "<br>";
@@ -49,18 +50,19 @@ function restas(){
 
 	for(var i=0; i<nEjercicios; i++){
 		matrizRestas.push(new Array());
+		var randomNum1 = 0;
 
 		for(var j=0; j<2; j++){
 			switch(tipoResultados){
 				case '1':
 					// Todos los resultados
-					var randomNum1 = aleatorio(nMax,nMin);
+					randomNum1 = aleatorio(nMax,nMin);
 					matrizRestas[i].push(randomNum1);
 				break;
 				case '2':
 					// Resultados positivos incluyendo 0
 					if (j==0) {
-						var randomNum1 = aleatorio(nMax,nMin);
+						randomNum1 = aleatorio(nMax,nMin);
 						matrizRestas[i].push(randomNum1);
 					} else{
 						randomNum1 = aleatorio(matrizRestas[i][0],nMin);
@@ -70,7 +72,7 @@ function restas(){
 				case '3':
 					// Resultados positivos excluyendo 0
 					if (j==0) {
-						var randomNum1 = aleatorio(nMax,nMin);
+						randomNum1 = aleatorio(nMax,nMin);
 						matrizRestas[i].push(randomNum1);
 					} else{
 						if (matrizRestas[i][0]!=1) {
@@ -87,7 +89,7 @@ function restas(){
 						nMax = 2;
 					};
 					if (j==0) {
-						var randomNum1 = aleatorio(nMax-1,nMin);
+						randomNum1 = aleatorio(nMax-1,nMin);
 						matrizRestas[i].push(randomNum1);
 					} else{
 						randomNum1 = aleatorio(nMax,matrizRestas[i][0]);
@@ -151,15 +153,21 @@ function multiplicaciones(){
 	for (var i=0; i<nEjercicios; i++) {
 		for(var j=0; j<nTerm; j++){
 			var tmp = aleatorio(nMax,nMin);
+
+			if (tmp == 0) {
+				j--; // Eliminar los 0's del problema
+				continue;
+			}
+
 			resultadoEjercicio *= tmp;
 
 			problemas += tmp;
 
 			if (j<nTerm-1) {
-				problemas += " * ";
+				problemas += "*";
 			} else{
 				if (respuestas) {
-					problemas += " (R: " + resultadoEjercicio + ")";
+					problemas += " (R: " + limitarDecimales(resultadoTmp) + ")";
 				}
 			}
 		}
@@ -189,23 +197,26 @@ function divisiones(){
 
 		for(var j=0; j<2; j++){
 			// Sólo resultados enteros
+			var randomNum = aleatorio(nMax,nMin);
+
+			if (randomNum == 0) {
+				j--; // Eliminar 0's de los problemas
+				continue;
+			}
+
 			if (resultadosEnteros) {
 				if (j==0) {
-					var randomNum1 = aleatorio(nMax,nMin);
-					matrizDivisiones[i].push(randomNum1);
+					matrizDivisiones[i].push(randomNum);
 				} else{
-					var randomNumTmp = aleatorio(nMax,nMin);
-
-					if (matrizDivisiones[i][0]%randomNumTmp == 0) {
-						matrizDivisiones[i].push(randomNumTmp);
+					if (matrizDivisiones[i][0]%randomNum == 0) {
+						matrizDivisiones[i].push(randomNum);
 					} else{
 						j--;
 					}					
 				}
 			} else{
-				//Resultados con punto decimal
-				var randomNum1 = aleatorio(nMax,nMin);
-				matrizDivisiones[i].push(randomNum1);
+				//Resultados con decimales
+				matrizDivisiones[i].push(randomNum);
 			}
 		}
 	}
@@ -222,13 +233,6 @@ function divisiones(){
 				resultadoEjercicio = tmp;
 			} else{
 				resultadoEjercicio /= tmp;
-				
-				// Limitar a sólo 4 decimales
-				if(!resultadosEnteros){
-					if (resultadoEjercicio % 1 != 0) {
-						resultadoEjercicio = limitarDecimales(resultadoEjercicio);
-					}					
-				}
 			}
 
 			problemas += tmp;
@@ -237,7 +241,7 @@ function divisiones(){
 				problemas += " / ";
 			} else{
 				if (respuestas) {
-					problemas += " (R: " + resultadoEjercicio + ")";
+					problemas += " (R: " + limitarDecimales(resultadoEjercicio) + ")";
 				}
 
 				problemas += "<br>";

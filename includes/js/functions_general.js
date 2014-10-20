@@ -29,15 +29,15 @@ function aleatorio(nMax,nMin){
 
 // ALTERNAR ENTRE EXPONENTES FIJOS Y VARIABLES
 function expFijos(expr){
-	$("#exp-fijos").show();
-	$("#exp-var").hide();
+	$("#exp-fijos").removeClass('ocultar');
+	$("#exp-var").addClass("ocultar");
 
 	$("#ejemplo").html("De la forma: " + expr);
 }
 
 function expVariables(expr){
-	$("#exp-var").show();
-	$("#exp-fijos").hide();
+	$("#exp-fijos").addClass('ocultar');
+	$("#exp-var").removeClass("ocultar");
 
 	$("#ejemplo").html("De la forma: " + expr);
 }
@@ -56,12 +56,14 @@ function cerrandoResultados(){
 
 // TRUNCAR NÚMEROS AL INICIO DEL PROBLEMA
 function truncarNumero(num){
-	var tmp = "";
+	var tmp = num;
 
-	switch(num){
-		case 1: tmp = ""; break;
-		case -1: tmp = "-"; break;
-		default: tmp = num; break;
+	if (num.toString().indexOf('.') == -1) {
+		if(num == 1){
+			tmp = "";
+		} else if(num == -1){
+			tmp = "-";
+		}
 	}
 
 	return tmp;
@@ -69,7 +71,7 @@ function truncarNumero(num){
 
 // TRUNCAR NÚMEROS EN EL CUERPO DEL PROBLEMA
 function truncarNumeroCuerpo(num){
-	var tmp = "";
+	var tmp = num;
 
 	if (num == 1) {
 		tmp = "+";
@@ -77,8 +79,6 @@ function truncarNumeroCuerpo(num){
 		tmp = "-";
 	} else if(num > 1){
 		tmp = "+" + num;
-	} else {
-		tmp = num;
 	}
 
 	return tmp;
@@ -128,35 +128,107 @@ function literalesElegidasAleatorias(numeroLiterales){
 
 
 // LIMITAR DECIMALES
-function limitarDecimales(numeroAtruncar){
-	var resultadoStr = numeroAtruncar.toString();
-	var arrResultado = resultadoStr.split(".");
-	var decimales = arrResultado[1];
-
-	if (decimales.length > 4) {
-		return numeroAtruncar.toFixed(4);
+function limitarDecimales(numeroTruncar){
+	var numero = numeroTruncar;
+	var contadorCeros = 0;
+	
+	// Números Enteros
+	if (numero % 1 == 0) {
+		// Si el número es menor a 9,999,999
+		var numStr = numero.toString();
+		if (numStr.length <= 7) {
+			numero = numeral(numero).format('0,0');
+		} else{
+			numero = aNotacionCientifica(numero); // Notación Exponencial
+		}
 	} else{
-		return numeroAtruncar;
+	// Números con decimales
+		var decimalNotacionCientifica = numero.toExponential();
+		var arrNumero = decimalNotacionCientifica.split('e');
+		var numeros = arrNumero[0];
+		var exponente = arrNumero[1];
+
+		// Número con menos de 4 decimales
+		if (exponente >= -4) {
+			numero = numeral(numero).format('0,0.[0000]');
+		} else{
+		// Número convertido en Notación científica.
+			numero = aNotacionCientifica(numero);
+		}
 	}
+	
+	return numero;
+}
+
+function aNotacionCientifica (numeroConvertir){
+	var numero = numeroConvertir;
+	var numeroExponencial = numero.toExponential();
+	var arrExponencial = numeroExponencial.split('e');
+	var numeros = arrExponencial[0];
+	var exponente = arrExponencial[1];
+
+	var arrNumeros = numeros.split('.');
+	var enteros = arrNumeros[0];
+	var decimales = arrNumeros[1];
+	var decimalesMostrar = "";
+
+	for(var i=0; i<decimales.length; i++){
+		decimalesMostrar += decimales[i];
+		if (i==3) break;
+	}
+
+	var notacionCientifica = enteros + "." + decimalesMostrar + "x10<sup>";
+
+	if (exponente>1) {
+		notacionCientifica += Math.abs(exponente);
+	} else {
+		notacionCientifica += exponente;
+	}
+
+	notacionCientifica += "</sup>";
+
+	return notacionCientifica;
 }
 
 
 // SELECCIONAR EXPONENTES
-function seleccionarExponentes(tipoExponente){
+function seleccionarExponentes(tipoExponente, permitirCeros){
 	var exp = 0;
+	var valTipoExp = parseInt(tipoExponente);
+	var error = "Error 0xEE00";
 
-	switch (tipoExponente){
-		case 0:
+	for(var i=0; i<1; i++){
+		if (valTipoExp == 0){
 			exp = document.getElementById("exponente-fijo").value;
-			break;
-		case 1:
+		}else {
 			var nExpMin = document.getElementById("exp-min").value;
 			var nExpMax = document.getElementById("exp-max").value;
 			exp = aleatorio(nExpMax,nExpMin);
-		break;
+		}
+
+		if (!permitirCeros && exp == 0) {
+			if(valTipoExp == 0){
+				return error;
+			} else if(valTipoExp == 1){
+				if (nExpMin != 0 || nExpMax != 0) {
+					i--;
+					continue;
+				} else{
+					return error;
+				}
+			}
+		}
 	}
 
 	return exp;
+}
+
+
+// ERROR DE EXPONENTES
+function errorExponentes(){
+	var mensajeError = "<p class='centrar error'>No se permiten los 0's como exponentes</p>";
+	$("#botones").addClass("ocultar");
+	document.getElementById("resultado").innerHTML = mensajeError;
 }
 
 
@@ -164,43 +236,18 @@ function seleccionarExponentes(tipoExponente){
 function copiar(){
 	var texto = document.getElementById("resultado").innerHTML;
 	texto = texto.replace(/<br>/g, "\n");
-	
 	var map = '⁰¹²³⁴⁵⁶⁷⁸⁹';
-	//var mapNegativos = ['⁰','ˉ¹','­ˉ²','­ˉ³','­ˉ⁴','­ˉ⁵','­ˉ⁶','­ˉ⁷','ˉ⁸','­ˉ⁹'];
-	/*
-	var copiar = texto.replace(/<sup>(\d*)<\/sup>/g, function (_, digits) {
-	    return Array.prototype.map.call(digits, function (digit) {
-	    	//console.log("digito:" + (+digit));
-	    	console.log("# exp: " + map.charAt(+digit));
-	        return map.charAt(+digit);
-	    }).join('');
-	});
-	*/
 	
 	var copiar = texto.replace(/<sup>(\-*(\d*))<\/sup>/g, function (str, digits){
-		//var exp = "";
-		//var cont = 0;
 		return Array.prototype.map.call(digits, function (digit) {
-			/*
-			console.log("str :" + str);
-			console.log("digits: " + digits);
-			console.log("digits-length: " + digits.length);
-			console.log("digit: " + digit);
-			*/
 			var exp = "";
-			
+
 			if (digit != '-') {
 				exp += map.charAt(digit);
-				//cont++;
 			} else {
-				exp += "ˉ";
-				//cont++;
+				//exp += "ˉ";
+				exp += "¯";
 			}
-
-			/*if (cont == digits.length) {
-				console.log("# exp: " + exp);
-				return exp;
-			};*/
 			return exp;
 	    }).join('');
 	});

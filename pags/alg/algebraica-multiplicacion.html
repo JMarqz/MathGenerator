@@ -18,6 +18,7 @@
 	<script src="../../includes/js/functions_general.js"></script>
 	<script src="../../includes/js/functions_algebra.js"></script>
 	<script src="../../includes/js/jquery.mobile-1.4.4.min.js"></script>
+	<script src="../../includes/js/numeral.js"></script>
 </head>
 <body>
 	<div data-role="page" id="page" data-theme="a">		
@@ -48,26 +49,26 @@
 			    
 			    <!-- Exponentes -->
 			    <div id="exp-fijos">
-			    	<label for="exponente-fijo">Número a utilizar en el exponente (1-10)</label>
-			    	<input type="range" name="exponente-fijo" id="exponente-fijo" data-mini="true" data-track-theme="b" data-highlight="true" min="1" max="10" value="2">
+			    	<label for="exponente-fijo">Número a utilizar en el exponente (-10 a 10)</label>
+			    	<input type="range" name="exponente-fijo" id="exponente-fijo" data-mini="true" data-track-theme="b" data-highlight="true" min="-10" max="10" value="2">
 			    </div>
 
-			    <div id="exp-var" style="display: none;">
+			    <div id="exp-var" class="ocultar">
 				    <div data-role="rangeslider" data-mini="true" data-track-theme="b">
-				        <label for="exponentes-variables">Rango de números a utilizar en el exponente (1 a 10)</label>
-				        <input type="range" name="exponentes-variables" id="exp-min" min="1" max="10" value="1" >
-				        <input type="range" name="exponentes-variables" id="exp-max" min="1" max="10" value="3">
+				        <label for="exponentes-variables">Rango de números a utilizar en el exponente (-10 a 10)</label>
+				        <input type="range" name="exponentes-variables" id="exp-min" min="-10" max="10" value="1" >
+				        <input type="range" name="exponentes-variables" id="exp-max" min="-10" max="10" value="3">
 				    </div>
 			    </div>
 			    <!-- Terminan Exponentes -->
 
-			    <label for="nLiterales">Número de literales (1-2)</label>
+			    <label for="nLiterales">Número de literales (1 a 2)</label>
 			    <input type="range" name="nLiterales" id="nLiterales" data-mini="true" data-track-theme="b" data-highlight="true" min="1" max="2" value="2">
 			    
-			    <label for="nTerminos">Número de términos a multiplicar (2-10)</label>
+			    <label for="nTerminos">Número de términos a multiplicar (2 a 10)</label>
 			    <input type="range" name="nTerminos" id="nTerminos" data-mini="true" data-track-theme="b" data-highlight="true" min="2" max="10" value="4">
 
-			    <label for="nEjercicios">Número de ejercicios a generar (1-100)</label>
+			    <label for="nEjercicios">Número de ejercicios a generar (1 a 100)</label>
 			    <input type="range" name="nEjercicios" id="nEjercicios" data-mini="true" data-track-theme="b" data-highlight="true" min="1" max="100" value="10">
 
 			    <label for="respuestas">Incluir respuestas</label>
@@ -92,7 +93,7 @@
 			    	<div id="resultado" name="resultado"></div>
 			    	
 			    	<!-- BTNS -->
-			    	<div data-role="controlgroup" data-type="horizontal" class="centrar">
+			    	<div id="botones" data-role="controlgroup" data-type="horizontal" class="centrar">
 			        	<a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" onClick="copiar()">Copiar</a>
 	        			<a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" onClick="imprimir()">Imprimir</a>
 	        		</div>

@@ -11,6 +11,15 @@ a {
 	text-align: center!important;
 }
 
+/* ERROR */
+.error {
+	color: #FF8000;
+}
+
+.ocultar {
+	display: none;
+}
+
 /* RANGESLIDER */
 .ui-bar-b {
 	border-color: transparent!important;

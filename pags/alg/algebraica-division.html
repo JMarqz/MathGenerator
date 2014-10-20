@@ -18,6 +18,7 @@
 	<script src="../../includes/js/functions_general.js"></script>
 	<script src="../../includes/js/functions_algebra.js"></script>
 	<script src="../../includes/js/jquery.mobile-1.4.4.min.js"></script>
+	<script src="../../includes/js/numeral.js"></script>
 </head>
 <body>
 	<div data-role="page" id="page" data-theme="a">		
@@ -27,7 +28,7 @@
 		</header>
 
 		<div data-role="content">
-			<p id="ejemplo" class="ejemplo">De la forma: a x<sup>m</sup>y<sup>n</sup> / b x<sup>m</sup>y<sup>n</sup></p>
+			<p id="ejemplo" class="ejemplo">De la forma: a x<sup>m</sup>y<sup>n</sup> / b x<sup>p</sup>y<sup>r</sup></p>
 
 			<!-- FORMULARIO -->
 			<form id="form">
@@ -43,28 +44,28 @@
 			        <input type="radio" onClick="expFijos('a x<sup>m</sup>y<sup>m</sup> / b x<sup>m</sup>y<sup>m</sup>')" name="exponentes" id="exp-fijos-radio" value="0">
 			        
 			        <label for="exp-variables-radio">Exponentes variables</label>
-			        <input type="radio" onClick="expVariables('a x<sup>m</sup>y<sup>n</sup> / b x<sup>m</sup>y<sup>n</sup>')" name="exponentes" id="exp-variables-radio" value="1" checked="checked">
+			        <input type="radio" onClick="expVariables('a x<sup>m</sup>y<sup>n</sup> / b x<sup>p</sup>y<sup>r</sup>')" name="exponentes" id="exp-variables-radio" value="1" checked="checked">
 			    </fieldset>
 			    
 			    <!-- Exponentes -->
-			    <div id="exp-fijos" style="display: none;">
-			    	<label for="exponente-fijo">Número a utilizar en el exponente (1-10)</label>
-			    	<input type="range" name="exponente-fijo" id="exponente-fijo" data-mini="true" data-track-theme="b" data-highlight="true" min="1" max="10" value="2">
+			    <div id="exp-fijos" class="ocultar">
+			    	<label for="exponente-fijo">Número a utilizar en el exponente (-10 a 10)</label>
+			    	<input type="range" name="exponente-fijo" id="exponente-fijo" data-mini="true" data-track-theme="b" data-highlight="true" min="-10" max="10" value="2">
 			    </div>
 
 			    <div id="exp-var">
 				    <div data-role="rangeslider" data-mini="true" data-track-theme="b">
-				        <label for="exponentes-variables">Rango de números a utilizar en el exponente (1 a 10)</label>
-				        <input type="range" name="exponentes-variables" id="exp-min" min="-10" max="10" value="-10" >
+				        <label for="exponentes-variables">Rango de números a utilizar en el exponente (-10 a 10)</label>
+				        <input type="range" name="exponentes-variables" id="exp-min" min="-10" max="10" value="1" >
 				        <input type="range" name="exponentes-variables" id="exp-max" min="-10" max="10" value="3">
 				    </div>
 			    </div>
 			    <!-- Terminan Exponentes -->
 
-			    <label for="nLiterales">Número de literales (1-2)</label>
+			    <label for="nLiterales">Número de literales (1 a 2)</label>
 			    <input type="range" name="nLiterales" id="nLiterales" data-mini="true" data-track-theme="b" data-highlight="true" min="1" max="2" value="2">
 
-			    <label for="nEjercicios">Número de ejercicios a generar (1-100)</label>
+			    <label for="nEjercicios">Número de ejercicios a generar (1 a 100)</label>
 			    <input type="range" name="nEjercicios" id="nEjercicios" data-mini="true" data-track-theme="b" data-highlight="true" min="1" max="100" value="10">
 
 			    <label for="respuestas">Incluir respuestas</label>
@@ -90,7 +91,7 @@
 			    	<div id="resultado" name="resultado"></div>
 			    	
 			    	<!-- BTNS -->
-			    	<div data-role="controlgroup" data-type="horizontal" class="centrar">
+			    	<div id="botones" data-role="controlgroup" data-type="horizontal" class="centrar">
 			        	<a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" onClick="copiar()">Copiar</a>
 	        			<a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" onClick="imprimir()">Imprimir</a>
 	        		</div>

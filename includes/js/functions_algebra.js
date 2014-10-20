@@ -18,7 +18,8 @@ function factoriales(){
 			for(var j=tmp; j>=1; j--){
 				resultadoEjercicio *= j; // Generando respuesta
 			}
-			problemas += " R: [" + resultadoEjercicio + "]"; // Mostrando las respuestas
+
+			problemas += " R: [" + limitarDecimales(resultadoEjercicio) + "]"; // Mostrando las respuestas
 		}
 
 		problemas += "<br>";
@@ -36,6 +37,7 @@ function exponenciales(){
 	var nMin = document.getElementById("base-min").value;
 	var nMax = document.getElementById("base-max").value;
 	var respuestas = $("#respuestas").is(":checked");
+	var permitirCerosExp = $("#ceros-exp").is(":checked");
 	var tipoExp = $('input[name=tipo-exponentes]:checked').val();
 	
 	var problemas = "";
@@ -45,22 +47,36 @@ function exponenciales(){
 	// Generando el número de ejercicios
 	for(var i=0; i<nEjercicios; i++){
 		var tmp = aleatorio(nMax,nMin);
-		
-		// Tipo de exponentes
-		exp = seleccionarExponentes(parseInt(tipoExp));
 
-		resultadoEjercicio = Math.pow(tmp,exp);
-
-		problemas += tmp + "<sup>" + exp + "</sup>";
-
-		if (respuestas) {
-			problemas += " R: [" + resultadoEjercicio + "]";
+		// No permitir los 0's en los ejercicios
+		if (tmp == 0) {
+			i--;
+			continue;
 		}
 
-		problemas += "<br>";
+		// Exponentes
+		exp = seleccionarExponentes(tipoExp, permitirCerosExp);
+
+		if (!isNaN(exp)) {
+			// Exponentes mostrados correctamente
+			resultadoEjercicio = Math.pow(tmp,exp);
+		
+			problemas += tmp + "<sup>" + exp + "</sup>";
+
+			if (respuestas) {
+				problemas += " R: [" + limitarDecimales(resultadoEjercicio) + "]";
+			}
+
+			problemas += "<br>";
+			$("#botones").removeClass("ocultar");
+			document.getElementById("resultado").innerHTML = problemas;
+
+		} else{
+			// Se necesita habilitar los ceros
+			errorExponentes();
+		}
 	}
 	
-	document.getElementById("resultado").innerHTML = problemas;
 	cambiarColorBarraEstado();
 }
 
@@ -78,6 +94,7 @@ function sumasAlgebraicas(){
 
 	var problemas = "";
 	var suma = 0;
+	var exponentesCorrectos = true;
 
 
 	// Generar los ejercicios
@@ -90,54 +107,65 @@ function sumasAlgebraicas(){
 		var exponentesElegidos = [];
 
 		for(var e=0; e<nLiterales; e++){
-			var expTmp = seleccionarExponentes(parseInt(valTipoExp));
-			exponentesElegidos[exponentesElegidos.length] = parseInt(expTmp);
-		}
+			var expTmp = seleccionarExponentes(valTipoExp, false);
 
-		// Crear los términos
-		for(var j=0; j<nTerminos; j++){
-			var nAleatorio = aleatorio(nMin, nMax);
-			var numTruncado = "";
-
-			if (nAleatorio == 0) {
-				j--; // Eliminar los 0's de los problemas
+			if (isNaN(expTmp)) {
+				exponentesCorrectos = false;
 			} else{
-				if (j==0) {
-					numTruncado = truncarNumero(nAleatorio);
-				} else{
-					numTruncado = truncarNumeroCuerpo(nAleatorio);
-				}
-
-				problemas += numTruncado;
-				suma += nAleatorio;
-
-
-				// Agregar Literales y exponentes
-				for(var k=0; k<nLiterales; k++){
-					problemas += literalesElegidas[k] + "<sup>" + truncarExponente(exponentesElegidos[k]) + "</sup>";
-				}
+				exponentesElegidos[exponentesElegidos.length] = parseInt(expTmp);
 			}
 		}
 
-		// Resultados 
-		if (respuestas) {
-			problemas += " R: [" + truncarNumero(suma);
+		if (exponentesCorrectos) {
+			// Crear los términos
+			for(var j=0; j<nTerminos; j++){
+				var nAleatorio = aleatorio(nMin, nMax);
+				var numTruncado = "";
 
-			// Agregar Literales y exponentes a las respuestas
-			if (suma != 0) {
-				for(var k=0; k<nLiterales; k++){
-					problemas += literalesElegidas[k] + "<sup>" + truncarExponente(exponentesElegidos[k]) + "</sup>";
+				if (nAleatorio == 0) {
+					j--; // Eliminar los 0's de los problemas
+					continue;
+				} else{
+					if (j==0) {
+						numTruncado = truncarNumero(nAleatorio);
+					} else{
+						numTruncado = truncarNumeroCuerpo(nAleatorio);
+					}
+
+					problemas += numTruncado;
+					suma += nAleatorio;
+
+					// Agregar Literales y exponentes
+					for(var k=0; k<nLiterales; k++){
+						problemas += literalesElegidas[k] + "<sup>" + truncarExponente(exponentesElegidos[k]) + "</sup>";
+					}
 				}
 			}
 
-			problemas += "]";
-		};
+			// Resultados 
+			if (respuestas) {
+				problemas += " R: [" + truncarNumero(suma);
 
-		problemas += "<br>";
-		suma = 0;
+				// Agregar Literales y exponentes a las respuestas
+				if (suma != 0) {
+					for(var k=0; k<nLiterales; k++){
+						problemas += literalesElegidas[k] + "<sup>" + truncarExponente(exponentesElegidos[k]) + "</sup>";
+					}
+				}
+
+				problemas += "]";
+			};
+
+			problemas += "<br>";
+			suma = 0;
+
+			document.getElementById("resultado").innerHTML = problemas;
+		} else{
+			// Exponentes incorrectos
+			errorExponentes();
+		}
 	}
 
-	document.getElementById("resultado").innerHTML = problemas;
 	cambiarColorBarraEstado();
 }
 
@@ -154,8 +182,8 @@ function multiplicacionesAlgebraicas(){
 	var nLiterales = document.getElementById("nLiterales").value;
 
 	var problemas = "";
-	var numTruncado = "";
 	var resultado = 1;
+	var exponentesCorrectos = true;
 	
 
 	// Generar los ejercicios
@@ -168,9 +196,11 @@ function multiplicacionesAlgebraicas(){
 		// Crear los términos
 		for(var j=0; j<nTerminos; j++){
 			var nAleatorio = aleatorio(nMin, nMax);
+			var numTruncado = "";
 
 			if (nAleatorio == 0) {
 				j--; // Eliminar los 0's de los problemas
+				continue;
 			} else{
 				numTruncado = truncarNumero(nAleatorio);
 
@@ -181,10 +211,14 @@ function multiplicacionesAlgebraicas(){
 				for(var k=0; k<nLiterales; k++){
 					problemas += literalesElegidas[k];
 
-					var expTmp = seleccionarExponentes(parseInt(valTipoExp));
+					var expTmp = seleccionarExponentes(valTipoExp, false);
 
-					problemas += "<sup>" + truncarExponente(parseInt(expTmp)) + "</sup>";
-					sumaExponentes[k] += parseInt(expTmp);
+					if (isNaN(expTmp)) {
+						exponentesCorrectos = false;
+					} else{
+						problemas += "<sup>" + truncarExponente(parseInt(expTmp)) + "</sup>";
+						sumaExponentes[k] += parseInt(expTmp);
+					}
 				}
 
 				if(j<nTerminos-1){
@@ -193,25 +227,42 @@ function multiplicacionesAlgebraicas(){
 			}
 		}
 
-		// Resultados 
-		if (respuestas) {
-			problemas += " R: [" + truncarNumero(resultado);
+		if (exponentesCorrectos) {
+			// Resultados 
+			if (respuestas) {
+				var numTmp = limitarDecimales(resultado);
 
-			// Agregar Literales y exponentes a las respuestas
-			if (resultado != 0) {
-				for(var k=0; k<nLiterales; k++){
-					problemas += literalesElegidas[k] + "<sup>" + sumaExponentes[k] + "</sup>"
+				problemas += " R: [" + truncarNumero(numTmp);
+
+				if (numTmp.indexOf('x10') != -1) {
+					problemas += " ";
 				}
+
+				// Agregar Literales y exponentes a las respuestas
+				if (resultado != 0) {
+					for(var k=0; k<nLiterales; k++){
+						if (sumaExponentes[k] != 0) {
+							problemas += literalesElegidas[k];
+
+							if (sumaExponentes[k] != 1) {
+								problemas += "<sup>" + sumaExponentes[k] + "</sup>";
+							}
+						}
+					}
+				}
+
+				problemas += "]";
 			}
 
-			problemas += "]";
-		};
+			problemas += "<br>";
+			resultado = 1;
 
-		problemas += "<br>";
-		resultado = 1;
+			document.getElementById("resultado").innerHTML = problemas;
+		} else{
+			errorExponentes();
+		}
 	}
 
-	document.getElementById("resultado").innerHTML = problemas;
 	cambiarColorBarraEstado();
 }
 
@@ -230,6 +281,7 @@ function divisionesAlgebraicas(){
 	var problemas = "";
 	var numTruncado = "";
 	var resultado = 1;
+	var exponentesCorrectos = true;
 	
 
 	// Generar los ejercicios
@@ -246,6 +298,7 @@ function divisionesAlgebraicas(){
 
 			if (nAleatorio == 0) {
 				j--; // Eliminar los 0's
+				continue;
 			} else{
 				numTruncado = truncarNumero(nAleatorio);
 
@@ -256,14 +309,18 @@ function divisionesAlgebraicas(){
 				for(var k=0; k<nLiterales; k++){
 					problemas += literalesElegidas[k];
 
-					var expTmp = seleccionarExponentes(parseInt(valTipoExp));
+					var expTmp = seleccionarExponentes(valTipoExp, false);
 
-					problemas += "<sup>" + truncarExponente(parseInt(expTmp)) + "</sup>";
-
-					if (sumaExponentes[k] == '') {
-						sumaExponentes[k] = expTmp;
+					if (isNaN(expTmp)) {
+						exponentesCorrectos = false;
 					} else{
-						sumaExponentes[k] = sumaExponentes[k] - expTmp;
+						problemas += "<sup>" + truncarExponente(parseInt(expTmp)) + "</sup>";
+
+						if (sumaExponentes[k] == '') {
+							sumaExponentes[k] = expTmp;
+						} else{
+							sumaExponentes[k] = sumaExponentes[k] - expTmp;
+						}
 					}
 				}
 
@@ -277,37 +334,38 @@ function divisionesAlgebraicas(){
 			resultado = numerador / denominador;
 		}
 
-		// Resultados 
-		if (respuestas) {
-			// Limitar a sólo 4 decimales
-			if (resultado % 1 != 0) {
-				resultado = limitarDecimales(resultado);
-			};
+		if (exponentesCorrectos) {
+			// Resultados 
+			if (respuestas) {
+				problemas += " R: [";
+				
+				var resultadoTmp = limitarDecimales(resultado);
 
-			problemas += " R: [";
-			
-			if (sumaExponentes[0] != 0 || sumaExponentes[1] != 0) {
-				problemas += truncarNumero(resultado);
-			} else{
-				problemas += resultado;
-			}
-
-			// Agregar Literales y exponentes a las respuestas
-			if (resultado != 0) {
-				for(var k=0; k<nLiterales; k++){
-					if (sumaExponentes[k] != 0) {
-						problemas += literalesElegidas[k] + "<sup>" + truncarExponente(sumaExponentes[k]) + "</sup>";
-					};
+				if (sumaExponentes[0] != 0 || sumaExponentes[1] != 0) {
+					problemas += truncarNumero(resultadoTmp);
+				} else{
+					problemas += resultadoTmp;
 				}
+
+				// Agregar Literales y exponentes a las respuestas
+				if (resultado != 0) {
+					for(var k=0; k<nLiterales; k++){
+						if (sumaExponentes[k] != 0) {
+							problemas += literalesElegidas[k] + "<sup>" + truncarExponente(sumaExponentes[k]) + "</sup>";
+						};
+					}
+				}
+
+				problemas += "]";
 			}
 
-			problemas += "]";
-		};
-
-		problemas += "<br>";
+			problemas += "<br>";
+			document.getElementById("resultado").innerHTML = problemas;
+		} else{
+			errorExponentes();
+		}
 	}
 
-	document.getElementById("resultado").innerHTML = problemas;
 	cambiarColorBarraEstado();
 }
 
