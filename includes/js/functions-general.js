@@ -57,6 +57,7 @@ function cerrandoResultados(){
 // TRUNCAR NÚMEROS AL INICIO DEL PROBLEMA
 function truncarNumero(num){
 	var tmp = num;
+	console.log("truncado antes: " + tmp);
 
 	if (num.toString().indexOf('.') == -1) {
 		if(num == 1){
@@ -66,6 +67,7 @@ function truncarNumero(num){
 		}
 	}
 
+	console.log("truncado despues: " + tmp);
 	return tmp;
 }
 

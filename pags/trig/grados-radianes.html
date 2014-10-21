@@ -16,43 +16,39 @@
 	<script src="../../phonegap.js"></script>
 	<script src="../../includes/js/jquery-1.11.0.min.js"></script>
 	<script src="../../includes/js/functions-general.js"></script>
-	<script src="../../includes/js/functions-aritmetica.js"></script>
+	<script src="../../includes/js/functions-trigonometria.js"></script>
 	<script src="../../includes/js/jquery.mobile-1.4.4.min.js"></script>
 	<script src="../../includes/js/numeral.min.js"></script>
+	<script src="../../includes/js/fraction.js"></script>
 </head>
 <body>
 	<div data-role="page" id="page" data-theme="a">		
 		<header data-role="header">
-			<a href="../aritmetica.html" data-icon="carat-l" data-iconpos="notext" class="ui-icon ui-nodisc-icon">Atrás</a>
-			<h1>Divisiones</h1>
+			<a href="../algebra.html" data-icon="carat-l" data-iconpos="notext" class="ui-icon ui-nodisc-icon">Atrás</a>
+			<h1>Grados a Radianes</h1>
 		</header>
 
 		<div data-role="content">
-			<p class="ejemplo">De la forma: a / b</p>
+			<p id="ejemplo" class="ejemplo">De la forma: n˚ = mπ</p>
 
 			<!-- FORMULARIO -->
 			<form id="form">
 				<div data-role="rangeslider" data-mini="true" data-track-theme="b">
-			        <label for="range-1a">Rango de números a utilizar (-50 a 50)</label>
-			        <input type="range" name="rango-min" id="rango-min" min="-50" max="50" value="-10">
-			        <input type="range" name="rango-max" id="rango-max" min="-50" max="50" value="10">
+			        <label for="numeros-base">Rango de números a utilizar en la base (0 a 1080)</label>
+			        <input type="range" name="numeros-base" id="base-min" min="0" max="1080" value="0">
+			        <input type="range" name="numeros-base" id="base-max" min="0" max="1080" value="360">
 			    </div>
 			    
-				<label for="number">Número de ejercicios a generar (1 a 100)</label>
-			    <input type="range" name="number" id="number" data-mini="true" data-track-theme="b" data-highlight="true" min="1" max="100" value="10">
-
-			    <fieldset data-role="controlgroup" data-mini="true">
-				    <label for="resultados_enteros">Solo resultados enteros</label>
-				    <input type="checkbox" name="resultados_enteros" id="resultados_enteros">
-				    
-				    <label for="respuestas">Incluir respuestas</label>
-				    <input type="checkbox" name="respuestas" id="respuestas">
-			    </fieldset>
+			    <label for="ejercicios">Número de ejercicios a generar (1 a 100)</label>
+			    <input type="range" name="ejercicios" id="ejercicios" data-mini="true" data-track-theme="b" data-highlight="true" min="1" max="100" value="10">
+			    
+			    <label for="respuestas">Incluir respuestas</label>
+				<input type="checkbox" name="respuestas" id="respuestas" data-mini="true">
 			</form>
 
 			<!-- BTN GENERAR -->
 			<div class="centrar">
-				<a href="#popupDialog" data-rel="popup" data-position-to="window" data-transition="pop" class="ui-btn ui-btn-b ui-corner-all ui-shadow ui-btn-inline" onClick="divisiones()">Generar</a>
+				<a href="#popupDialog" data-rel="popup" data-position-to="window" data-transition="pop" class="ui-btn ui-btn-b ui-corner-all ui-shadow ui-btn-inline" onClick="grados_radianes()">Generar</a>
 			</div>
 
 
@@ -68,7 +64,7 @@
 			    	<div id="resultado" name="resultado"></div>
 			    	
 			    	<!-- BTNS -->
-			    	<div data-role="controlgroup" data-type="horizontal" class="centrar">
+			    	<div id="botones" data-role="controlgroup" data-type="horizontal" class="centrar">
 			        	<a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" onClick="copiar()">Copiar</a>
 	        			<a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" onClick="imprimir()">Imprimir</a>
 	        		</div>

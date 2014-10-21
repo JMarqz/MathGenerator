@@ -7,28 +7,28 @@
 	<meta name="format-detection" content="telephone=no" />
 	
 	<!-- CSS -->
-	<link rel="stylesheet" href="../../includes/css/modificaciones.css">
-	<link rel="stylesheet" href="../../includes/css/orange_theme.css">
-	<link rel="stylesheet" href="../../includes/css/jquery.mobile.structure-1.4.4.min.css">
-	<link rel="stylesheet" href="../../includes/css/jquery.mobile.icons.min.css">
+	<link rel="stylesheet" href="../../../includes/css/modificaciones.css">
+	<link rel="stylesheet" href="../../../includes/css/orange_theme.css">
+	<link rel="stylesheet" href="../../../includes/css/jquery.mobile.structure-1.4.4.min.css">
+	<link rel="stylesheet" href="../../../includes/css/jquery.mobile.icons.min.css">
 
 	<!-- JS -->
-	<script src="../../phonegap.js"></script>
-	<script src="../../includes/js/jquery-1.11.0.min.js"></script>
-	<script src="../../includes/js/functions-general.js"></script>
-	<script src="../../includes/js/functions-algebra.js"></script>
-	<script src="../../includes/js/jquery.mobile-1.4.4.min.js"></script>
-	<script src="../../includes/js/numeral.min.js"></script>
+	<script src="../../../phonegap.js"></script>
+	<script src="../../../includes/js/jquery-1.11.0.min.js"></script>
+	<script src="../../../includes/js/functions-general.js"></script>
+	<script src="../../../includes/js/functions-algebra.js"></script>
+	<script src="../../../includes/js/jquery.mobile-1.4.4.min.js"></script>
+	<script src="../../../includes/js/numeral.min.js"></script>
 </head>
 <body>
 	<div data-role="page" id="page" data-theme="a">		
 		<header data-role="header">
-			<a href="../algebra.html" data-icon="carat-l" data-iconpos="notext" class="ui-icon ui-nodisc-icon">Atrás</a>
-			<h1>Sumas algebraicas</h1>
+			<a href="../productos-notables.html" data-icon="carat-l" data-iconpos="notext" class="ui-icon ui-nodisc-icon">Atrás</a>
+			<h1>Factor Común</h1>
 		</header>
 
 		<div data-role="content">
-			<p id="ejemplo" class="ejemplo">De la forma: a x<sup>m</sup>y<sup>m</sup> + ... + b x<sup>m</sup>y<sup>m</sup></p>
+			<p id="ejemplo" class="ejemplo">De la forma: ca + cb = c (a+b), exponentes fijos</p>
 
 			<!-- FORMULARIO -->
 			<form id="form">
@@ -41,23 +41,23 @@
 			    <fieldset data-role="controlgroup" data-mini="true">
 			        <legend>Tipo de exponentes:</legend>
 			        <label for="exp-fijos-radio">Exponentes fijo</label>
-			        <input type="radio" onClick="expFijos('a x<sup>m</sup>y<sup>m</sup> + ... + b x<sup>m</sup>y<sup>m</sup>')" name="exponentes" id="exp-fijos-radio" value="0" checked="checked">
+			        <input type="radio" onClick="expFijos('ca + cb = c (a+b), exponentes fijos')" name="exponentes" id="exp-fijos-radio" value="0" checked="checked">
 			        
 			        <label for="exp-variables-radio">Exponentes variables</label>
-			        <input type="radio" onClick="expVariables('a x<sup>m</sup>y<sup>n</sup> + ... + b x<sup>m</sup>y<sup>n</sup>')" name="exponentes" id="exp-variables-radio" value="1">
+			        <input type="radio" onClick="expVariables('ca + cb = c (a+b), exponentes variables')" name="exponentes" id="exp-variables-radio" value="1">
 			    </fieldset>
 			    
 			    <!-- Exponentes -->
 			    <div id="exp-fijos">
-			    	<label for="exponente-fijo">Número a utilizar en el exponente (-10 a 10)</label>
-			    	<input type="range" name="exponente-fijo" id="exponente-fijo" data-mini="true" data-track-theme="b" data-highlight="true" min="-10" max="10" value="2">
+			    	<label for="exponente-fijo">Número a utilizar en el exponente (1 a 10)</label>
+			    	<input type="range" name="exponente-fijo" id="exponente-fijo" data-mini="true" data-track-theme="b" data-highlight="true" min="1" max="10" value="2">
 			    </div>
 
 			    <div id="exp-var" class="ocultar">
 				    <div data-role="rangeslider" data-mini="true" data-track-theme="b">
 				        <label for="exponentes-variables">Rango de números a utilizar en el exponente (-10 a 10)</label>
-				        <input type="range" name="exponentes-variables" id="exp-min" min="-10" max="10" value="1" >
-				        <input type="range" name="exponentes-variables" id="exp-max" min="-10" max="10" value="3">
+				        <input type="range" name="exponentes-variables" id="exp-min" min="1" max="10" value="1" >
+				        <input type="range" name="exponentes-variables" id="exp-max" min="1" max="10" value="3">
 				    </div>
 			    </div>
 			    <!-- Terminan Exponentes -->
@@ -65,7 +65,7 @@
 			    <label for="nLiterales">Número de literales (1 a 2)</label>
 			    <input type="range" name="nLiterales" id="nLiterales" data-mini="true" data-track-theme="b" data-highlight="true" min="1" max="2" value="2">
 			    
-			    <label for="nTerminos">Número de términos a sumar (2 a 10)</label>
+			    <label for="nTerminos">Número de términos a multiplicar (2 a 10)</label>
 			    <input type="range" name="nTerminos" id="nTerminos" data-mini="true" data-track-theme="b" data-highlight="true" min="2" max="10" value="4">
 
 			    <label for="nEjercicios">Número de ejercicios a generar (1 a 100)</label>
@@ -77,7 +77,7 @@
 
 			<!-- BTN GENERAR -->
 			<div class="centrar">
-				<a href="#popupDialog" data-rel="popup" data-position-to="window" data-transition="pop" class="ui-btn ui-btn-b ui-btn-b ui-corner-all ui-shadow ui-btn-inline" onClick="sumasAlgebraicas()">Generar</a>
+				<a href="#popupDialog" data-rel="popup" data-position-to="window" data-transition="pop" class="ui-btn ui-btn-b ui-corner-all ui-shadow ui-btn-inline" onClick="multiplicacionesAlgebraicas()">Generar</a>
 			</div>
 
 
