@@ -24,34 +24,32 @@
 	<div data-role="page" id="page" data-theme="a">		
 		<header data-role="header">
 			<a href="../productos-notables.html" data-icon="carat-l" data-iconpos="notext" class="ui-icon ui-nodisc-icon">Atrás</a>
-			<h1>Factor Común</h1>
+			<h1>Binomio al cuadrado</h1>
 		</header>
 
 		<div data-role="content">
-			<p id="ejemplo" class="ejemplo">De la forma: ca + cb = c(a+b)</p>
+			<p id="ejemplo" class="ejemplo">De la forma: a<sup>2</sup>+2ab+b<sup>2</sup> = (a+b)<sup>2</sup></p>
 
 			<!-- FORMULARIO -->
 			<form id="form">
 				<div data-role="rangeslider" data-mini="true" data-track-theme="b">
-			        <label for="range-1a">Rango de números a utilizar en el ejercicio (-50 a 50)</label>
-			        <input type="range" name="rango-min" id="rango-min" min="-50" max="50" value="-50" >
-			        <input type="range" name="rango-max" id="rango-max" min="-50" max="50" value="50">
+			        <label for="range-1a">Rango de números a utilizar en el binomio (-50 a 50)</label>
+			        <input type="range" name="rango-min" id="rango-min" min="-50" max="50" value="-10" >
+			        <input type="range" name="rango-max" id="rango-max" min="-50" max="50" value="10">
 			    </div>
 
 			    <div id="exp-var">
 				    <div data-role="rangeslider" data-mini="true" data-track-theme="b">
-				        <label for="exponentes-variables">Rango de números a utilizar en el exponente (1 a 10)</label>
+				        <label for="exponentes-variables">Rango de números a utilizar en los exponentes (1 a 10)</label>
 				        <input type="range" name="exponentes-variables" id="exp-min" min="1" max="10" value="1" >
 				        <input type="range" name="exponentes-variables" id="exp-max" min="1" max="10" value="3">
 				    </div>
 			    </div>
-			    <!-- Terminan Exponentes -->
 
+			    <!--
 			    <label for="nLiterales">Número de literales (1 a 2)</label>
 			    <input type="range" name="nLiterales" id="nLiterales" data-mini="true" data-track-theme="b" data-highlight="true" min="1" max="2" value="2">
-			    
-			    <label for="nTerminos">Número de términos (2 a 10)</label>
-			    <input type="range" name="nTerminos" id="nTerminos" data-mini="true" data-track-theme="b" data-highlight="true" min="2" max="10" value="3">
+				-->
 
 			    <label for="nEjercicios">Número de ejercicios a generar (1 a 100)</label>
 			    <input type="range" name="nEjercicios" id="nEjercicios" data-mini="true" data-track-theme="b" data-highlight="true" min="1" max="100" value="10">
@@ -63,7 +61,7 @@
 
 			<!-- BTN GENERAR -->
 			<div class="centrar">
-				<a href="#popupDialog" data-rel="popup" data-position-to="window" data-transition="pop" class="ui-btn ui-btn-b ui-corner-all ui-shadow ui-btn-inline" onClick="factorComun()">Generar</a>
+				<a href="#popupDialog" data-rel="popup" data-position-to="window" data-transition="pop" class="ui-btn ui-btn-b ui-corner-all ui-shadow ui-btn-inline" onClick="binomioCuadrado()">Generar</a>
 			</div>
 
 
