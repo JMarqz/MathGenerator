@@ -167,7 +167,7 @@ function multiplicaciones(){
 				problemas += "*";
 			} else{
 				if (respuestas) {
-					problemas += " | R: [" + limitarDecimales(resultadoTmp) + "]";
+					problemas += " | R: [" + limitarDecimales(resultadoEjercicio) + "]";
 				}
 			}
 		}
