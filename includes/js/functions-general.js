@@ -27,6 +27,28 @@ function aleatorio(nMax,nMin){
 }
 
 
+// ABRIR URL
+function abrirURL(url) {
+    var ref = window.open(encodeURI(url), '_system');
+}
+
+
+// Abrir Twitter
+function abrirTwitter(userName){
+    var twitter = "twitter://";
+
+    // AppAvailability v0.3.0
+    appAvailability.check(
+    twitter, // URI Scheme
+    function() {  // Success callback
+        window.open("twitter://user?screen_name="+userName);
+    },
+    function() {  // Error callback
+        window.open("http://www.twitter.com/"+userName, "_system");
+    });
+}
+
+
 // ALTERNAR ENTRE EXPONENTES FIJOS Y VARIABLES
 function expFijos(expr){
 	$("#exp-fijos").removeClass('ocultar');
@@ -57,7 +79,6 @@ function cerrandoResultados(){
 // TRUNCAR NÚMEROS AL INICIO DEL PROBLEMA
 function truncarNumero(num){
 	var tmp = num;
-	console.log("truncado antes: " + tmp);
 
 	if (num.toString().indexOf('.') == -1) {
 		if(num == 1){
@@ -67,7 +88,6 @@ function truncarNumero(num){
 		}
 	}
 
-	console.log("truncado despues: " + tmp);
 	return tmp;
 }
 

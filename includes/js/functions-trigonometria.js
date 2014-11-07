@@ -15,7 +15,7 @@ function grados_radianes(){
 		if (respuestas) {
 			var radianes = new Fraction(grados, 180);
 
-			problemas += " R: [";
+			problemas += " | R: [";
 
 			if (radianes != 1) {
 				 problemas += radianes; // QUE ONDA CON LOS 0's
@@ -42,21 +42,11 @@ function radianes_grados(){
 	var problemas = "";
 
 	for(var i=0; i<nEjercicios; i++){
-		/////////////////////////////////////////////////////////
-		// Crear fracción que su RESULTADO esté entre nMin y nMax
-		//var radianNumerador = aleatorio(180,1);
-		//var radianDenominador = aleatorio(radianNumerador * nMax,0);
 		var radianDenominador = aleatorio(180,nMin);
-		var radianNumerador = aleatorio(radianDenominador * nMax,nMin);
-		// Crear fracción que su RESULTADO esté entre nMin y nMax
-		/////////////////////////////////////////////////////////
-
-		console.log("numerador: " + radianNumerador);
-		console.log("denominator: " + radianDenominador);
+		var radianNumerador = aleatorio(radianDenominador * nMax, radianDenominador * nMin);
 
 		if (radianDenominador == 0) {
 			i--; // Evitar fracciones dividadas por 0
-			// || radianDenominador < radianNumerador*6
 			continue;
 		}
 
@@ -77,7 +67,7 @@ function radianes_grados(){
 			var resultado = grados.numerator / grados.denominator;
 			resultado = numeral(resultado).format('0,0.[00]');
 
-			problemas += " R: [" + resultado + "˚]";
+			problemas += " | R: [" + resultado + "˚]";
 		}
 
 		problemas += "<br>";

@@ -23,7 +23,7 @@ function sumas(){
 			} else{
 				if (respuestas) {
 					var resultadoTmp = numeral(resultadoEjercicio).format('0,0');
-					problemas += " R: [" + resultadoTmp + "]";
+					problemas += " | R: [" + resultadoTmp + "]";
 				}
 
 				problemas += "<br>";
@@ -124,7 +124,7 @@ function restas(){
 				problemas += " - ";
 			} else{
 				if (respuestas) {
-					problemas += " R: [" + resultadoEjercicio + "]";
+					problemas += " | R: [" + resultadoEjercicio + "]";
 				}
 				
 				problemas += "<br>";
@@ -167,7 +167,7 @@ function multiplicaciones(){
 				problemas += "*";
 			} else{
 				if (respuestas) {
-					problemas += " R: [" + limitarDecimales(resultadoTmp) + "]";
+					problemas += " | R: [" + limitarDecimales(resultadoTmp) + "]";
 				}
 			}
 		}
@@ -241,7 +241,7 @@ function divisiones(){
 				problemas += " / ";
 			} else{
 				if (respuestas) {
-					problemas += " R: [" + limitarDecimales(resultadoEjercicio) + "]";
+					problemas += " | R: [" + limitarDecimales(resultadoEjercicio) + "]";
 				}
 
 				problemas += "<br>";
