@@ -291,10 +291,12 @@ function copiar(){
 function imprimir(){
 	var imprimir = document.getElementById("resultado").innerHTML;
 
-	window.plugin.printer.isServiceAvailable(
+	//window.plugin.printer.isServiceAvailable(
+	cordova.plugins.printer.isAvailable{
 	    function (isAvailable) {
 	        if (isAvailable) {
-	        	window.plugin.printer.print(imprimir);
+	        	//window.plugin.printer.print(imprimir);
+	        	cordova.plugins.printer.print(imprimir, {name:"MathGenerator Test", duplex:false});
 	        } else{
 	        	navigator.notification.alert("¡Este servicio no está disponible en tu dispositivo!", null, 'Error', 'Ok');
 	        }
