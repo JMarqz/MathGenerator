@@ -80,8 +80,6 @@
     <gap:splash src="splash/ios/screen-ipad-portrait.png"           gap:platform="ios"     width="768" height="1024" />
     <gap:splash src="splash/ios/screen-ipad-portrait-2x.png"        gap:platform="ios"     width="1536" height="2008" />
     <!-- Launch Images -->
-    <!--<gap:splash src="screen/ios/launch-iphone6.png"                 gap:platform="ios"     width="750" height="1334"/>-->
-    <!--<gap:splash src="screen/ios/launch-iphone6+.png"                gap:platform="ios"     width="1242" height="2208"/>-->
     <gap:splash src="screen/ios/screen-iphone-portrait-750h.png"    gap:platform="ios"     width="750" height="1334"/>
     <gap:splash src="screen/ios/screen-iphone-portrait-1242h.png"   gap:platform="ios"     width="1242" height="2208"/>
 
