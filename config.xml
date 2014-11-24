@@ -23,6 +23,7 @@
     
     <!-- Plataforms -->
     <gap:platform name="ios" />
+    <gap:platform name="android" />
 
 	
     <!-- Plugins -->
@@ -42,6 +43,8 @@
     <preference name="DisallowOverscroll"       value="true" />
     <preference name="AutoHideSplashScreen"     value="false" />
     <preference name="detect-data-types"        value="false" />
+    <preference name="android-minSdkVersion"    value="11" />
+    <preference name="android-targetSdkVersion" value="11" />
     
 
     <!-- Permissions -->
